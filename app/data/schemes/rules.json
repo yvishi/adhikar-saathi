@@ -1,0 +1,251 @@
+{
+  "_about": "Every eligibility rule and complaint-letter fact used by app/backend/schemes.py and complaint.py. 'quote' is verbatim from 'source_file' (whitespace ignored); fragments joined by ' ... ' are separate lines of the same passage. kind: encoded = used as a hard rule in code; note = context used in wording only; not_encoded = seen in a source but deliberately NOT used as a rule (reason given). live=false means the text sits inside an HTML comment (hidden from site visitors). Checked by tests/test_schemes.py::test_rule_quotes_exist_in_sources.",
+  "rules": [
+    {
+      "id": "ESHRAM_AGE_MIN",
+      "scheme": "e-Shram",
+      "kind": "encoded",
+      "value": 16,
+      "statement": "Minimum registration age is 16 (both e-Shram sources agree). Below 16 = not eligible.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "A person aged 16 years or above who is engaged in unorganised work may register on eShram, subject to the applicable eligibility conditions.",
+      "live": true
+    },
+    {
+      "id": "ESHRAM_AGE_BAND_BROCHURE",
+      "scheme": "e-Shram",
+      "kind": "encoded",
+      "value": {"min": 16, "max": 59},
+      "statement": "Brochure gives the band 16-59. Ages 16-59 satisfy both sources. Age 60+ is left UNKNOWN because the live FAQ (16 or above; 'no action ... at 60') does not agree with the brochure's upper limit.",
+      "source_file": "app/data/sources/eshram_intro.pdf",
+      "quote": "Any worker who is working in unorganized sector and aged between 16- ... 59, is eligible to register on the eSHRAM portal",
+      "live": true
+    },
+    {
+      "id": "ESHRAM_AGE_60_FAQ",
+      "scheme": "e-Shram",
+      "kind": "note",
+      "statement": "Live FAQ says turning 60 needs no action and the UAN stays valid, but scheme eligibility follows each scheme's own rules. This is why age 60+ is UNKNOWN, not false.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "No action is required merely because the worker turns 60. The UAN remains valid, although eligibility under individual schemes is governed by their own rules.",
+      "live": true
+    },
+    {
+      "id": "ESHRAM_NOT_EPFO_ESIC",
+      "scheme": "e-Shram",
+      "kind": "encoded",
+      "statement": "An unorganised worker is not a member of ESIC or EPFO. EPFO/ESIC member = not eligible.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "Any worker who is a home-based worker, self-employed worker or a wage worker working in the unorganised sector and not a member of ESIC or EPFO, is called an unorganised worker.",
+      "live": true
+    },
+    {
+      "id": "ESHRAM_NOT_INCOME_TAX_PAYER",
+      "scheme": "e-Shram",
+      "kind": "encoded",
+      "statement": "Income tax payer = not eligible. There is no income limit otherwise, so monthly income is not used for e-Shram.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "There are no income criteria for registering on e-Shram as unorganised worker. However, the worker should not be an income tax payee.",
+      "live": true
+    },
+    {
+      "id": "ESHRAM_NOT_GOVT_EMPLOYEE",
+      "scheme": "e-Shram",
+      "kind": "note",
+      "statement": "Government employees are also outside the definition. The API has no such field, so a 'true' result always lists this as something to confirm.",
+      "source_file": "app/data/sources/eshram_intro.pdf",
+      "quote": "it also includes a worker in the organized sector who is not a member of ESIC/ EPFO/ Government Employee.",
+      "live": true
+    },
+    {
+      "id": "ESHRAM_VALIDATION",
+      "scheme": "e-Shram",
+      "kind": "note",
+      "statement": "Data is re-checked against EPFO/ESIC/income-tax records, so a wrong 'no' answer can surface later.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "Yes, the data will be validated periodically by ESIC, EPFO and income tax departments.",
+      "live": true
+    },
+    {
+      "id": "PMSBY_VIA_ESHRAM_BROCHURE",
+      "scheme": "PMSBY",
+      "kind": "note",
+      "statement": "The 2021 e-Shram brochure says registration gives Rs 2 lakh accident cover under PMSBY. Used in wording only; PMSBY is always returned UNKNOWN (see next two rules).",
+      "source_file": "app/data/sources/eshram_intro.pdf",
+      "quote": "he/she will get an Accidental Insurance cover of 2 Lacs",
+      "live": true
+    },
+    {
+      "id": "PMSBY_LIVE_FAQ_ONLY_REGISTRATION",
+      "scheme": "PMSBY",
+      "kind": "encoded",
+      "statement": "CONFLICT: the current FAQ says only registration is being done, and every PMSBY question in that FAQ (how PMSBY is linked, the 18-59 age band, second-year premium) is inside an HTML comment, i.e. withdrawn from the live page. So we cannot confirm the cover applies today: PMSBY is always UNKNOWN and the user is sent to the helpline.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "Right now, only registration is being done through e-Shram.",
+      "live": true
+    },
+    {
+      "id": "PMSBY_AGE_18_59_HIDDEN",
+      "scheme": "PMSBY",
+      "kind": "not_encoded",
+      "statement": "Age band 18-59 for PMSBY through e-Shram appears only in a commented-out FAQ entry, and premium/renewal answers are likewise commented out. Not encoded.",
+      "source_file": "app/data/sources/eshram_faq.html",
+      "quote": "No, the person should be between 18 – 59 years to be eligible for PMSBY through eSHRAM registration.",
+      "live": false
+    },
+    {
+      "id": "PMSYM_AGE",
+      "scheme": "PM-SYM",
+      "kind": "encoded",
+      "value": {"min": 18, "max": 40},
+      "statement": "Entry age 18 to 40 inclusive.",
+      "source_file": "app/data/sources/pmsym.html",
+      "quote": "Entry Age between 18 to 40 years",
+      "live": true
+    },
+    {
+      "id": "PMSYM_INCOME",
+      "scheme": "PM-SYM",
+      "kind": "encoded",
+      "value": 15000,
+      "statement": "Monthly income up to Rs 15,000 inclusive.",
+      "source_file": "app/data/sources/pmsym.html",
+      "quote": "Monthly Income up to Rs 15000/-",
+      "live": true
+    },
+    {
+      "id": "PMSYM_UNORGANISED",
+      "scheme": "PM-SYM",
+      "kind": "encoded",
+      "statement": "PM-SYM is for unorganised workers. The PM-SYM page does not define the term; we use the e-Shram definition (not an ESIC/EPFO member, rule ESHRAM_NOT_EPFO_ESIC) so 'true' needs an explicit 'not an EPFO/ESIC member'. An EPFO/ESIC member is returned UNKNOWN (not false) because the PM-SYM page itself lists no exclusions.",
+      "source_file": "app/data/sources/pmsym.html",
+      "quote": "For Unorganized Workers (UW)",
+      "live": true
+    },
+    {
+      "id": "PMSYM_EXCLUSIONS_NOT_ON_PAGE",
+      "scheme": "PM-SYM",
+      "kind": "not_encoded",
+      "statement": "The local PM-SYM page has no exclusion list (EPFO/ESIC/NPS/income tax are not stated as PM-SYM conditions). Not encoded; 'true' results tell the user the exclusion list was not verified. Contribution amounts are not on the page either and are never stated.",
+      "source_file": "app/data/sources/pmsym.html",
+      "quote": "Voluntary and Contributory Pension Scheme",
+      "live": true
+    },
+    {
+      "id": "MAT_WOMEN_ONLY",
+      "scheme": "Maternity Benefit",
+      "kind": "encoded",
+      "statement": "The Act regulates the employment of women around childbirth, so a male profile is not eligible; a non-pregnant profile is not eligible for a current-pregnancy check.",
+      "source_file": "app/data/sources/wb_maternity.pdf",
+      "quote": "An Act to regulate the employment of women in certain establishments",
+      "live": true
+    },
+    {
+      "id": "MAT_COVERED_ESTABLISHMENTS",
+      "scheme": "Maternity Benefit",
+      "kind": "encoded",
+      "statement": "Only certain establishments are covered (factory, mine, plantation; shops/establishments with 10+ persons). The profile has no such field, so this is always listed as missing info and the result is never 'true'.",
+      "source_file": "app/data/sources/wb_maternity.pdf",
+      "quote": "It is applicable to every establishment being a factory, mine or plantation ... Every shop or establishment within the meaning of any law for the time being in force in relation to shops and establishments in a State, in which ten or more persons are employed, or were employed, on any day of the preceding twelve months",
+      "live": true
+    },
+    {
+      "id": "MAT_80_DAYS",
+      "scheme": "Maternity Benefit",
+      "kind": "encoded",
+      "value": 80,
+      "statement": "At least 80 days actually worked with that employer in the 12 months before expected delivery. Not in the API profile, so listed as missing info.",
+      "source_file": "app/data/sources/wb_maternity.pdf",
+      "quote": "No woman shall be entitled to maternity benefit unless she has actually worked in an establishment of the employer from whom she claims maternity benefit, for a period of not less than 1*[eighty days] in the twelve months immediately preceding the date of her expected delivery.",
+      "live": true
+    },
+    {
+      "id": "MAT_ESI_EXCLUDED",
+      "scheme": "Maternity Benefit",
+      "kind": "encoded",
+      "statement": "The Act does not apply to establishments covered by the ESI Act. The profile only says ESIC/EPFO membership (one flag), so 'True' there only adds a warning; it is not treated as false.",
+      "source_file": "app/data/sources/wb_maternity.pdf",
+      "quote": "The Act does not apply to any factory or other establishment to which the provisions of the Employees' State Insurance Act apply.",
+      "live": true
+    },
+    {
+      "id": "MAT_CASUAL_DAILY_WAGE",
+      "scheme": "Maternity Benefit",
+      "kind": "note",
+      "statement": "Supreme Court quote in the Act's FAQ: casual/muster-roll daily-wage women are not excluded merely for that reason. Used in wording for daily_wage occupation.",
+      "source_file": "app/data/sources/wb_maternity.pdf",
+      "quote": "we do not find anything contained in the Act which entitles only regular woman employees to the benefit of maternity leave and not those who are engaged on casual basis or on muster roll on daily wage basis.",
+      "live": true
+    },
+    {
+      "id": "MAT_DURATION_AMOUNT_NOT_ENCODED",
+      "scheme": "Maternity Benefit",
+      "kind": "not_encoded",
+      "statement": "This West Bengal copy is an older text (it says 12 weeks and refers to the Minimum Wages Act 1948, since replaced). The 2017 amendment (longer leave) is NOT in the file, so leave duration, medical bonus and amounts are never stated. Coverage for unorganised workers beyond the establishments above is not settled by this source.",
+      "source_file": "app/data/sources/wb_maternity.pdf",
+      "quote": "The maximum period for which any woman shall be entitled to maternity benefit shall be 12 weeks",
+      "live": true
+    },
+    {
+      "id": "COW_EMPLOYER_MUST_PAY",
+      "scheme": "Code on Wages, 2019 (complaint letter)",
+      "kind": "encoded",
+      "section": "s.43",
+      "statement": "Every employer must pay all amounts due under the Code to the employee.",
+      "source_file": "app/data/sources/wages_code_labourgov.pdf",
+      "quote": "Every employer shall pay all amounts required to be paid under this Code to every",
+      "live": true
+    },
+    {
+      "id": "COW_CLAIM_AUTHORITY",
+      "scheme": "Code on Wages, 2019 (complaint letter)",
+      "kind": "encoded",
+      "section": "s.45(1)",
+      "statement": "Claims are heard by authority/authorities appointed by the appropriate Government (a Gazetted Officer or above). The Code names no office or address, so the letter addresses 'the authority appointed under the Code on Wages, 2019' and the worker must find the right office for the state.",
+      "source_file": "app/data/sources/wages_code_labourgov.pdf",
+      "quote": "The appropriate Government may, by notification, appoint one or more ... authorities, not below the rank of a Gazetted Officer, to hear and determine the claims which ... arises under the provisions of this Code.",
+      "live": true
+    },
+    {
+      "id": "COW_CLAIM_APPLICANT",
+      "scheme": "Code on Wages, 2019 (complaint letter)",
+      "kind": "encoded",
+      "section": "s.45(4)",
+      "statement": "The employee concerned may file the application (also a registered trade union of which they are a member, or the Inspector-cum-Facilitator).",
+      "source_file": "app/data/sources/wages_code_labourgov.pdf",
+      "quote": "Any application before the authority for claim referred to in sub-section (1) may ... (a) the employee concerned; or",
+      "live": true
+    },
+    {
+      "id": "COW_CLAIM_THREE_YEARS",
+      "scheme": "Code on Wages, 2019 (complaint letter)",
+      "kind": "encoded",
+      "section": "s.45(6)",
+      "value": 3,
+      "statement": "Application within three years from the date the claim arises; later accepted only on sufficient cause.",
+      "source_file": "app/data/sources/wages_code_labourgov.pdf",
+      "quote": "The application under sub-section (4) may be filed within a period of three years ... from the date on which claims referred to in sub-section (1) arises: ... after three years on sufficient cause being shown by the applicant for such delay.",
+      "live": true
+    },
+    {
+      "id": "COW_BURDEN_ON_EMPLOYER",
+      "scheme": "Code on Wages, 2019 (complaint letter)",
+      "kind": "note",
+      "section": "s.59",
+      "statement": "Once a claim is filed for non-payment or less payment, the burden of proving the dues were paid is on the employer. Used only in a reassurance line in the notes.",
+      "source_file": "app/data/sources/wages_code_labourgov.pdf",
+      "quote": "Where a claim has been filed on account of non-payment of remuneration or ... bonus or less payment of wages or bonus or on account of making deductions not authorised ... by this Code from the wages of an employee, the burden to prove that the said dues have ... been paid shall be on the employer.",
+      "live": true
+    },
+    {
+      "id": "COW_PROCEDURE_BY_RULES",
+      "scheme": "Code on Wages, 2019 (complaint letter)",
+      "kind": "not_encoded",
+      "section": "s.45(5) and the rule-making section",
+      "statement": "The Code text lists rule-made forms only for a single application for many employees and for appeals; it fixes no form for one worker's claim. State rules may. The notes tell the worker to ask the labour office whether a particular format is required. No fee or format is stated in the letter.",
+      "source_file": "app/data/sources/wages_code_labourgov.pdf",
+      "quote": "the form of single application in respect of a number of employees under ... sub-section (5) of section 45;",
+      "live": true
+    }
+  ]
+}

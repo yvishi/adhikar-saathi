@@ -1,0 +1,17 @@
+# Hindi strings written by backend-core (please verify)
+- errors.py stt_failed message_hi: अभी आवाज़ समझने में दिक्कत आ रही है। कृपया थोड़ी देर बाद कोशिश करें।
+- errors.py llm_failed message_hi: अभी जवाब तैयार नहीं हो पा रहा। कृपया थोड़ी देर बाद कोशिश करें।
+- errors.py tts_failed message_hi: आवाज़ बनाने में दिक्कत आई। आप लिखा हुआ जवाब पढ़ सकते हैं।
+- errors.py bad_request message_hi: अनुरोध सही नहीं है। कृपया अपना सवाल बोलें या लिखें।
+- errors.py rate_limited message_hi: अभी बहुत ज़्यादा इस्तेमाल हो रहा है। कृपया थोड़ी देर बाद कोशिश करें।
+- errors.py audio_too_long message_hi: रिकॉर्डिंग बहुत लंबी है। कृपया 30 सेकंड से छोटा सवाल बोलें।
+- errors.py no_speech message_hi: आवाज़ सुनाई नहीं दी। कृपया दोबारा बोलें।
+- errors.py (Sarvam returns HTTP 400 for an unreadable recording, code bad_request) message_hi: यह रिकॉर्डिंग पढ़ी नहीं जा सकी। कृपया दोबारा बोलें।
+- main.py 501 message_hi (schemes / complaint module missing): यह सुविधा अभी तैयार नहीं है।
+- prompts.py REFUSE_HI (fixed fallback refusal, used when the model output is unusable or an answer has no valid citation): माफ़ कीजिए, इस बारे में मेरे पास पक्की जानकारी नहीं है। ई-श्रम से जुड़े सवालों के लिए आप हेल्पलाइन 14434 पर बात कर सकते हैं।
+- prompts.py MOCK_INTRO_HI (mock mode only): यह एक नमूना जवाब है, असली जवाब नहीं।
+- prompts.py MOCK_CLARIFY_HI (mock mode only): क्या आप थोड़ा और बता सकते हैं?
+- prompts.py MOCK_TRANSCRIPT (mock mode only; copied from scripts/smoke_test.py Q1): ठेकेदार ने मेरी मजदूरी नहीं दी, मैं क्या करूँ?
+- pipeline.py _HI_EXPAND (keyword fallback and mock mode only; Hindi hint words mapped to English terms, not shown to users): मजदूरी/मज़दूरी/वेतन/पैसे/तनख्वाह -> wages; न्यूनतम; पेंशन; श्रम; बीमा; घरेलू; हेल्पलाइन; गर्भ/प्रसव/मातृत्व; उत्पीड़न/छेड़; ठेकेदार
+- live_check.py (dev script only, not shown to users): three test questions (wage, land dispute, "how long can I claim this money") and the TTS line नमस्ते, मैं अधिकार साथी हूँ।
+- The model writes all normal Hindi answers from the English cards; review those on the eval set. SYSTEM_PROMPT in prompts.py is English.

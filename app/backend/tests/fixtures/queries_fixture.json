@@ -1,0 +1,778 @@
+{
+ "notes": "Retrieval benchmark queries for retrieval_cards_fixture.json. 'expected' lists acceptable card ids (a hit means ANY of them is in the top-k). oos=true means no card should match well. Hindi here is for testing only and is recorded in app/data/hindi_review/retrieval.md. split=tuned queries were written together with the glossary; split=heldout queries were written after the glossary was frozen and give a more honest estimate. split=heldout2 was written after the glossary was extended using the misses of split=heldout (so heldout is no longer fully blind); heldout2 is the least biased estimate.",
+ "queries": [
+  {
+   "q": "मेरे ठेकेदार ने तीन महीने से मजदूरी नहीं दी",
+   "lang": "hi",
+   "expected": [
+    "W-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "न्यूनतम मजदूरी कितनी होनी चाहिए",
+   "lang": "hi",
+   "expected": [
+    "W-01",
+    "W-07"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "मैं दिहाड़ी मजदूर हूँ क्या मुझे न्यूनतम वेतन मिलेगा",
+   "lang": "hi",
+   "expected": [
+    "W-07",
+    "W-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "ई-श्रम कार्ड कैसे बनवाएं",
+   "lang": "hi",
+   "expected": [
+    "S-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "क्या ई-श्रम में रजिस्ट्रेशन के पैसे लगते हैं",
+   "lang": "hi",
+   "expected": [
+    "S-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "बुढ़ापे में पेंशन कैसे मिलेगी",
+   "lang": "hi",
+   "expected": [
+    "S-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "ओवरटाइम का पैसा कितना मिलता है",
+   "lang": "hi",
+   "expected": [
+    "W-06"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "गर्भवती महिला को छुट्टी और पैसे मिलते हैं क्या",
+   "lang": "hi",
+   "expected": [
+    "M-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "काम की जगह पर मेरे साथ छेड़छाड़ हुई शिकायत कहाँ करूँ",
+   "lang": "hi",
+   "expected": [
+    "H-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "मालिक तनख्वाह से पैसे काट लेता है",
+   "lang": "hi",
+   "expected": [
+    "W-04"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "मैं घरों में झाड़ू पोछा करती हूँ मेरे लिए कौन सा कानून है",
+   "lang": "hi",
+   "expected": [
+    "D-01",
+    "D-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "निर्माण मजदूर का लेबर कार्ड कैसे बनता है",
+   "lang": "hi",
+   "expected": [
+    "S-05"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "दुर्घटना में मौत होने पर बीमा मिलता है क्या",
+   "lang": "hi",
+   "expected": [
+    "S-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "14434 नंबर पर क्या मदद मिलती है",
+   "lang": "hi",
+   "expected": [
+    "X-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "औरतों को आदमियों के बराबर मजदूरी क्यों नहीं मिलती",
+   "lang": "hi",
+   "expected": [
+    "W-05"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "मजदूरी कब तक मिल जानी चाहिए",
+   "lang": "hi",
+   "expected": [
+    "W-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "thekedar ne majdoori nahi di kya karu",
+   "lang": "hinglish",
+   "expected": [
+    "W-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "mera malik salary late deta hai",
+   "lang": "hinglish",
+   "expected": [
+    "W-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "eshram card kaise banaye",
+   "lang": "hinglish",
+   "expected": [
+    "S-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "pension scheme kya hai mazdoor ke liye",
+   "lang": "hinglish",
+   "expected": [
+    "S-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "overtime ka paisa nahi milta",
+   "lang": "hinglish",
+   "expected": [
+    "W-06"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "pregnant hu to chutti milegi kya",
+   "lang": "hinglish",
+   "expected": [
+    "M-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "office mein mere sath yaun utpidan hua complaint kaha kare",
+   "lang": "hinglish",
+   "expected": [
+    "H-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "ghar mein kaam karne wali bai ke rights",
+   "lang": "hinglish",
+   "expected": [
+    "D-01",
+    "D-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "mistri ka labour card kaise banta hai",
+   "lang": "hinglish",
+   "expected": [
+    "S-05"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "accident ho jaye to bima milega kya",
+   "lang": "hinglish",
+   "expected": [
+    "S-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "malik paise kaat leta hai",
+   "lang": "hinglish",
+   "expected": [
+    "W-04"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "kam se kam mazdoori kitni hai",
+   "lang": "hinglish",
+   "expected": [
+    "W-01",
+    "W-07"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "What is the minimum wage for a daily wage worker",
+   "lang": "en",
+   "expected": [
+    "W-01",
+    "W-07"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "My contractor has not paid me for two months",
+   "lang": "en",
+   "expected": [
+    "W-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "How long do I have to file a complaint for unpaid wages",
+   "lang": "en",
+   "expected": [
+    "W-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "When should my salary be paid every month",
+   "lang": "en",
+   "expected": [
+    "W-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "How do I register on e-Shram",
+   "lang": "en",
+   "expected": [
+    "S-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Do I have to pay money to make an e-Shram card",
+   "lang": "en",
+   "expected": [
+    "S-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Am I eligible for a pension under PM-SYM",
+   "lang": "en",
+   "expected": [
+    "S-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Is there insurance if I get injured at work",
+   "lang": "en",
+   "expected": [
+    "S-03"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Can my employer cut my salary as a fine",
+   "lang": "en",
+   "expected": [
+    "W-04"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Do women get paid the same as men for the same work",
+   "lang": "en",
+   "expected": [
+    "W-05"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "I am pregnant, can my employer fire me",
+   "lang": "en",
+   "expected": [
+    "M-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "My supervisor touched me inappropriately, who do I complain to",
+   "lang": "en",
+   "expected": [
+    "H-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Is there a law for maids and domestic workers",
+   "lang": "en",
+   "expected": [
+    "D-01",
+    "D-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "What can I call 14434 for",
+   "lang": "en",
+   "expected": [
+    "X-01"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Can you file a court case for me",
+   "lang": "en",
+   "expected": [
+    "X-02"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "Benefits for construction workers",
+   "lang": "en",
+   "expected": [
+    "S-05"
+   ],
+   "split": "tuned"
+  },
+  {
+   "q": "What is the weather in Delhi today",
+   "lang": "en",
+   "expected": [],
+   "oos": true,
+   "split": "tuned"
+  },
+  {
+   "q": "How do I cook chicken biryani at home",
+   "lang": "en",
+   "expected": [],
+   "oos": true,
+   "split": "tuned"
+  },
+  {
+   "q": "Who won the cricket match yesterday",
+   "lang": "en",
+   "expected": [],
+   "oos": true,
+   "split": "tuned"
+  },
+  {
+   "q": "मुझे शेयर बाजार में पैसे कैसे लगाने चाहिए",
+   "lang": "hi",
+   "expected": [],
+   "oos": true,
+   "split": "tuned"
+  },
+  {
+   "q": "aaj ka mausam kaisa rahega",
+   "lang": "hinglish",
+   "expected": [],
+   "oos": true,
+   "split": "tuned"
+  },
+  {
+   "q": "mera phone kharab ho gaya hai kaise theek karu",
+   "lang": "hinglish",
+   "expected": [],
+   "oos": true,
+   "split": "tuned"
+  },
+  {
+   "q": "ठेकेदार पिछले दो महीने की दिहाड़ी दबाकर बैठा है",
+   "lang": "hi",
+   "expected": [
+    "W-03"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "हमें सरकार की तरफ से बुढ़ापे में हर महीने पैसा कैसे मिलेगा",
+   "lang": "hi",
+   "expected": [
+    "S-02"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "काम करते हुए हाथ टूट गया तो सरकार से कुछ मिलेगा क्या",
+   "lang": "hi",
+   "expected": [
+    "S-03",
+    "S-05"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "मालिक ने बिना बताए मेरी पगार में से पैसे काट लिए",
+   "lang": "hi",
+   "expected": [
+    "W-04"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "बच्चा होने के बाद दुकान वाले ने काम से हटा दिया",
+   "lang": "hi",
+   "expected": [
+    "M-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "साहब ने मुझे गलत तरीके से छुआ, मैं किसको बताऊँ",
+   "lang": "hi",
+   "expected": [
+    "H-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "क्या घर में काम करने वालों के लिए अलग से कोई कानून बना है",
+   "lang": "hi",
+   "expected": [
+    "D-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "मुझे अपने राज्य में रोज की कितनी मजदूरी मिलनी चाहिए",
+   "lang": "hi",
+   "expected": [
+    "W-01",
+    "W-07"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "इस हेल्पलाइन पर फोन करके मजदूरी का केस दर्ज हो सकता है क्या",
+   "lang": "hi",
+   "expected": [
+    "X-01",
+    "W-03"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "contractor ne do mahine se paise rok rakhe hain",
+   "lang": "hinglish",
+   "expected": [
+    "W-03"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "hume roz ki mazdoori kab milni chahiye",
+   "lang": "hinglish",
+   "expected": [
+    "W-02"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "site pe kaam karte waqt haath toot gaya, koi sarkari madad milegi",
+   "lang": "hinglish",
+   "expected": [
+    "S-03",
+    "S-05"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "shram card banwane ke liye kitna paisa dena padta hai",
+   "lang": "hinglish",
+   "expected": [
+    "S-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "mujhe budhape mein pension chahiye kya karna hoga",
+   "lang": "hinglish",
+   "expected": [
+    "S-02"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "bahut der tak kaam karwate hain par extra paisa nahi dete",
+   "lang": "hinglish",
+   "expected": [
+    "W-06"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "women ko same kaam ka barabar paisa milna chahiye na",
+   "lang": "hinglish",
+   "expected": [
+    "W-05"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "My boss keeps holding back my wages every month",
+   "lang": "en",
+   "expected": [
+    "W-03",
+    "W-02"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "Who do I call for help with my e-Shram problem",
+   "lang": "en",
+   "expected": [
+    "X-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "What are my rights as a house cleaner",
+   "lang": "en",
+   "expected": [
+    "D-01",
+    "D-02"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "Can a company terminate a woman because she is expecting a baby",
+   "lang": "en",
+   "expected": [
+    "M-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "Are there any government benefits for masons and building labourers",
+   "lang": "en",
+   "expected": [
+    "S-05"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "I was harassed by my manager at the factory, what should I do",
+   "lang": "en",
+   "expected": [
+    "H-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "Is an unregistered daily wager entitled to the state minimum rate",
+   "lang": "en",
+   "expected": [
+    "W-07",
+    "W-01"
+   ],
+   "split": "heldout"
+  },
+  {
+   "q": "best way to learn English quickly",
+   "lang": "en",
+   "expected": [],
+   "oos": true,
+   "split": "heldout"
+  },
+  {
+   "q": "meri beti ka school admission kaise hoga",
+   "lang": "hinglish",
+   "expected": [],
+   "oos": true,
+   "split": "heldout"
+  },
+  {
+   "q": "मेरे गाँव में बिजली का बिल बहुत ज्यादा आया है",
+   "lang": "hi",
+   "expected": [],
+   "oos": true,
+   "split": "heldout"
+  },
+  {
+   "q": "पिछले तीन साल से मेरी बकाया रकम नहीं मिली, अब भी दावा कर सकता हूँ?",
+   "lang": "hi",
+   "expected": [
+    "W-03"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "मुझे ओवरटाइम करने के बाद दोगुना पैसा मिलना चाहिए ना",
+   "lang": "hi",
+   "expected": [
+    "W-06"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "ई-श्रम पर नाम लिखवाने के लिए किसी को रिश्वत देनी पड़ेगी क्या",
+   "lang": "hi",
+   "expected": [
+    "S-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "मेरी बीवी पेट से है, कंपनी छुट्टी नहीं दे रही",
+   "lang": "hi",
+   "expected": [
+    "M-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "फैक्ट्री में सुपरवाइजर गंदी बातें करता है और हाथ लगाता है",
+   "lang": "hi",
+   "expected": [
+    "H-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "मैं राजमिस्त्री हूँ, मेरे लिए कौन सी सरकारी योजना है",
+   "lang": "hi",
+   "expected": [
+    "S-05"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "बुजुर्ग होने पर हर महीने तीन हजार रुपये वाली स्कीम कौन सी है",
+   "lang": "hi",
+   "expected": [
+    "S-02"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "maid ko bhi minimum salary milti hai kya",
+   "lang": "hinglish",
+   "expected": [
+    "W-01",
+    "W-07",
+    "D-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "meri company ne pehle bataya nahi aur fine laga diya",
+   "lang": "hinglish",
+   "expected": [
+    "W-04"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "mujhe eshram ka helpline number chahiye",
+   "lang": "hinglish",
+   "expected": [
+    "X-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "kya court jaane ke liye vakil chahiye, aap meri jagah case kar sakte ho",
+   "lang": "hinglish",
+   "expected": [
+    "X-02"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "gharon mein kaam karne walon ke liye koi central kanoon nahi hai kya",
+   "lang": "hinglish",
+   "expected": [
+    "D-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "Will I get paid maternity leave if I have worked only three months",
+   "lang": "en",
+   "expected": [
+    "M-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "Can domestic workers get insurance and pension from the government",
+   "lang": "en",
+   "expected": [
+    "D-02",
+    "S-04"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "How many days does the boss have to clear my monthly pay",
+   "lang": "en",
+   "expected": [
+    "W-02"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "Is it legal to pay less to female labourers for the same job",
+   "lang": "en",
+   "expected": [
+    "W-05"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "Does registering on the portal cost anything",
+   "lang": "en",
+   "expected": [
+    "S-01"
+   ],
+   "split": "heldout2"
+  },
+  {
+   "q": "How to apply for a driving licence",
+   "lang": "en",
+   "expected": [],
+   "oos": true,
+   "split": "heldout2"
+  },
+  {
+   "q": "बच्चों के स्कूल की फीस कितनी होती है",
+   "lang": "hi",
+   "expected": [],
+   "oos": true,
+   "split": "heldout2"
+  },
+  {
+   "q": "gold ka bhav aaj kya hai",
+   "lang": "hinglish",
+   "expected": [],
+   "oos": true,
+   "split": "heldout2"
+  }
+ ]
+}

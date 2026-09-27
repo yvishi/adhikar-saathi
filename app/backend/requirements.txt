@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+requests
+python-dotenv
+pytest
+httpx
+fastembed
+onnxruntime
+numpy

@@ -1,0 +1,13 @@
+.env
+scripts/smoke_out/
+__pycache__/
+*.pyc
+
+# Retrieval embedding model (~241MB, redownload via: python -m app.backend.retrieval --download-model)
+app/backend/retrieval_data/models/
+
+# Generated TTS audio cache
+app/data/cache/
+
+# Node modules, if any dev tooling adds them
+node_modules/

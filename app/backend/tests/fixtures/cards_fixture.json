@@ -1,0 +1,184 @@
+[
+ {
+  "id": "W-01",
+  "topic": "wages",
+  "title_en": "Minimum wage is a legal right",
+  "text_en": "No employer may pay any employee less than the minimum rate of wages notified by the government. This applies to workers in organised and unorganised sectors.",
+  "text_hi": null,
+  "keywords_en": [
+   "minimum wage",
+   "daily wage",
+   "less pay"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "Code on Wages, 2019",
+   "section": "s.5",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "W-02",
+  "topic": "wages",
+  "title_en": "When wages must be paid",
+  "text_en": "Wages for daily work must be paid at the end of the shift. Weekly wages are due on the last working day before the weekly holiday. Monthly wages are due before the seventh day of the next month.",
+  "text_hi": null,
+  "keywords_en": [
+   "wages paid",
+   "payment date",
+   "delay",
+   "not paid",
+   "salary"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "Code on Wages, 2019",
+   "section": "s.17",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "W-03",
+  "topic": "wages",
+  "title_en": "Claim unpaid wages within three years",
+  "text_en": "A worker can apply to the authority for unpaid wages within three years from the date the claim arises. A later application can be accepted if there is sufficient cause.",
+  "text_hi": null,
+  "keywords_en": [
+   "unpaid wages",
+   "claim",
+   "complaint",
+   "contractor not paid",
+   "three years"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "Code on Wages, 2019",
+   "section": "claim provision",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "S-01",
+  "topic": "schemes",
+  "title_en": "e-Shram registration is free",
+  "text_en": "Registration on e-Shram is free and workers pay no one for it. Registered workers get accident insurance cover of Rs 2 lakh under PMSBY.",
+  "text_hi": null,
+  "keywords_en": [
+   "e-shram",
+   "registration",
+   "insurance",
+   "accident"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "e-Shram portal",
+   "section": "FAQ",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "S-02",
+  "topic": "schemes",
+  "title_en": "PM-SYM pension for unorganised workers",
+  "text_en": "Unorganised workers aged 18 to 40 with monthly income up to Rs 15,000 can join PM-SYM. It gives an assured pension of Rs 3,000 a month at age 60. Joining is voluntary and contributory, and the government matches the contribution.",
+  "text_hi": null,
+  "keywords_en": [
+   "pension",
+   "pm-sym",
+   "old age",
+   "age 60"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "PM-SYM",
+   "section": "scheme page",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "D-01",
+  "topic": "domestic",
+  "title_en": "Domestic workers: no dedicated central law",
+  "text_en": "There is no dedicated central law for domestic workers. They are covered only through the general labour codes and state policies.",
+  "text_hi": null,
+  "keywords_en": [
+   "domestic worker",
+   "maid",
+   "house help"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "Supreme Court order 29 Jan 2025 / expert committee report",
+   "section": "",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "X-01",
+  "topic": "helpline",
+  "title_en": "Helpline 14434 is the e-Shram helpdesk",
+  "text_en": "14434 is the e-Shram helpdesk (also 1800-8896811) with Hindi support. It helps with e-Shram registration and benefits. It is not a channel for wage claims.",
+  "text_hi": null,
+  "keywords_en": [
+   "helpline",
+   "14434",
+   "helpdesk"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "e-Shram portal",
+   "section": "helpdesk",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ },
+ {
+  "id": "X-02",
+  "topic": "meta",
+  "title_en": "What this assistant cannot do",
+  "text_en": "This assistant gives general information from verified sources. It is not legal advice and cannot file cases or represent you.",
+  "text_hi": null,
+  "keywords_en": [
+   "legal advice",
+   "lawyer",
+   "limits"
+  ],
+  "keywords_hi": [],
+  "source": {
+   "name": "Adhikar Saathi",
+   "section": "",
+   "url": "",
+   "file": ""
+  },
+  "verified": true,
+  "status": "ready",
+  "notes": ""
+ }
+]

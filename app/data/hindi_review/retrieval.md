@@ -1,0 +1,339 @@
+# Hindi strings written by the retrieval agent (please verify)
+
+Format: where used | Hindi string | meaning the code assumes. All of this is used only to MATCH what a worker says to English cards; none of it is shown to users. A wrong entry can only cause a wrong retrieval, so mark any entry that is wrong or means something else.
+
+## Glossary keys in `app/backend/retrieval.py` (`_GLOSSARY_RAW`): Hindi word or phrase -> English terms it is expanded to
+
+- glossary | मजदूरी | wages wage pay
+- glossary | मज़दूरी | wages wage pay
+- glossary | मजदुरी | wages wage pay
+- glossary | वेतन | salary wages pay
+- glossary | तनख्वाह | salary wages pay
+- glossary | तनखा | salary wages pay
+- glossary | तनखाह | salary wages pay
+- glossary | पगार | salary wages pay
+- glossary | सैलरी | salary wages pay
+- glossary | दिहाड़ी | daily wage daily wager
+- glossary | दिहाडी | daily wage daily wager
+- glossary | दिहाड़ी | daily wage daily wager
+- glossary | न्यूनतम | minimum
+- glossary | न्यूनतम | minimum
+- glossary | कम से कम | minimum
+- glossary | पैसे | pay wages money
+- glossary | पैसा | pay wages money
+- glossary | पैसो | pay wages money
+- glossary | रुपये | pay wages money
+- glossary | रुपए | pay wages money
+- glossary | ठेकेदार | contractor contract worker
+- glossary | ठेकदार | contractor contract worker
+- glossary | ठेकेदारी | contractor contract worker
+- glossary | ठेका | contractor contract worker
+- glossary | मालिक | employer
+- glossary | मालकिन | employer
+- glossary | सेठ | employer
+- glossary | नियोक्ता | employer
+- glossary | मालिको | employer
+- glossary | मजदूर | worker labour unorganised
+- glossary | मज़दूर | worker labour unorganised
+- glossary | मजदुर | worker labour unorganised
+- glossary | कामगार | worker labour unorganised
+- glossary | श्रमिक | worker labour unorganised
+- glossary | मजदूरो | worker labour unorganised
+- glossary | काटता | deduction cut fine
+- glossary | काट | deduction cut fine
+- glossary | कटौती | deduction cut fine
+- glossary | जुर्माना | fine deduction
+- glossary | एडवांस | advance deduction
+- glossary | पेशगी | advance deduction
+- glossary | ओवरटाइम | overtime extra hours
+- glossary | ओवर टाइम | overtime extra hours
+- glossary | अतिरिक्त घंटे | overtime extra hours
+- glossary | ज्यादा घंटे | overtime extra hours
+- glossary | ज्यादा घण्टे | overtime extra hours
+- glossary | बोनस | bonus
+- glossary | छुट्टी | leave paid leave holiday
+- glossary | छुट्टियां | leave paid leave holiday
+- glossary | अवकाश | leave paid leave holiday
+- glossary | साप्ताहिक | weekly
+- glossary | हफ्ते | weekly
+- glossary | देरी | late delay
+- glossary | देर | late delay
+- glossary | समय पर | payment date when paid
+- glossary | कब तक | payment date when paid
+- glossary | कब मिल | payment date when paid
+- glossary | महीने | monthly month
+- glossary | महिना | monthly month
+- glossary | महीना | monthly month
+- glossary | मजदूरी नहीं | unpaid wages withheld not paid dues
+- glossary | पैसे नहीं | unpaid wages withheld not paid dues
+- glossary | पैसा नहीं | unpaid wages withheld not paid dues
+- glossary | वेतन नहीं | unpaid wages withheld not paid dues
+- glossary | तनख्वाह नहीं | unpaid wages withheld not paid dues
+- glossary | नहीं दी | unpaid wages withheld not paid dues
+- glossary | नहीं दिया | unpaid wages withheld not paid dues
+- glossary | नहीं मिली | unpaid wages withheld not paid dues
+- glossary | नहीं मिला | unpaid wages withheld not paid dues
+- glossary | नहीं मिले | unpaid wages withheld not paid dues
+- glossary | नहीं मिलता | unpaid wages withheld not paid dues
+- glossary | नहीं मिलती | unpaid wages withheld not paid dues
+- glossary | बकाया | unpaid dues wages
+- glossary | बाकी पैसे | unpaid dues wages
+- glossary | बाकी | unpaid dues wages
+- glossary | शिकायत | complaint claim authority
+- glossary | शिकायत करूं | complaint claim authority
+- glossary | फरियाद | complaint claim authority
+- glossary | दावा | claim application authority
+- glossary | तीन साल | three years time limit
+- glossary | 3 साल | three years time limit
+- glossary | बराबर | equal same
+- glossary | बराबरी | equal same
+- glossary | औरत | woman women gender
+- glossary | औरतों | woman women gender
+- glossary | महिला | woman women gender
+- glossary | महिलाओं | woman women gender
+- glossary | लड़की | woman women gender
+- glossary | स्त्री | woman women gender
+- glossary | आदमी | man men gender
+- glossary | आदमियों | man men gender
+- glossary | पुरुष | man men gender
+- glossary | मर्द | man men gender
+- glossary | भेदभाव | discrimination
+- glossary | भेद भाव | discrimination
+- glossary | पेंशन | pension
+- glossary | पेन्शन | pension
+- glossary | बुढ़ापे | old age retirement age pension
+- glossary | बुढ़ापा | old age retirement age pension
+- glossary | बुढापे | old age retirement age pension
+- glossary | बुज़ुर्ग | old age retirement age pension
+- glossary | वृद्धावस्था | old age retirement age pension
+- glossary | बूढ़े | old age retirement age pension
+- glossary | बुजुर्ग | old age retirement age pension
+- glossary | 60 साल | old age retirement age pension
+- glossary | बीमा | insurance accident cover
+- glossary | बिमा | insurance accident cover
+- glossary | दुर्घटना | accident injury insurance cover disability
+- glossary | हादसा | accident injury insurance cover disability
+- glossary | एक्सीडेंट | accident injury insurance cover disability
+- glossary | चोट | accident injury insurance cover disability
+- glossary | घायल | accident injury insurance cover disability
+- glossary | मौत | death accidental cover
+- glossary | मृत्यु | death accidental cover
+- glossary | मर जाए | death accidental cover
+- glossary | विकलांगता | disability cover
+- glossary | अपंग | disability cover
+- glossary | ईश्रम | eshram registration portal card
+- glossary | ई श्रम | eshram registration portal card
+- glossary | श्रम कार्ड | eshram registration portal card
+- glossary | रजिस्ट्रेशन | registration register
+- glossary | पंजीकरण | registration register
+- glossary | रजिस्टर | registration register
+- glossary | पंजीयन | registration register
+- glossary | रजिस्ट्रेशन | registration register
+- glossary | कार्ड | card
+- glossary | लेबर कार्ड | labour card labour welfare board registration
+- glossary | श्रमिक कार्ड | labour card labour welfare board registration
+- glossary | लेबर | labour card labour welfare board registration
+- glossary | लेबर कार्ड | labour card labour welfare board registration
+- glossary | निर्माण | construction building worker BOCW welfare board
+- glossary | मिस्त्री | construction building worker BOCW welfare board
+- glossary | मिस्री | construction building worker BOCW welfare board
+- glossary | राजमिस्त्री | construction building worker BOCW welfare board
+- glossary | बिल्डिंग | construction building worker BOCW welfare board
+- glossary | मकान बनाने | construction building worker BOCW welfare board
+- glossary | इमारत | construction building worker BOCW welfare board
+- glossary | योजना | scheme benefits government
+- glossary | स्कीम | scheme benefits government
+- glossary | योजनाएं | scheme benefits government
+- glossary | योजनाओं | scheme benefits government
+- glossary | लाभ | scheme benefits government
+- glossary | फायदा | scheme benefits government
+- glossary | फ़ायदा | scheme benefits government
+- glossary | सरकारी | scheme benefits government
+- glossary | श्रम योगी | PM-SYM pension Shram Yogi Maan-dhan
+- glossary | मानधन | PM-SYM pension Shram Yogi Maan-dhan
+- glossary | पीएम एसवाईएम | PM-SYM pension Shram Yogi Maan-dhan
+- glossary | असंगठित | unorganised informal
+- glossary | इनफॉर्मल | unorganised informal
+- glossary | सामाजिक सुरक्षा | social security
+- glossary | फ्री | free
+- glossary | मुफ्त | free
+- glossary | मुफ़्त | free
+- glossary | निःशुल्क | free
+- glossary | नि:शुल्क | free
+- glossary | पैसे लगते | free registration fee pay
+- glossary | पैसे लगेंगे | free registration fee pay
+- glossary | पैसे देने | free registration fee pay
+- glossary | रिश्वत | free registration fee pay
+- glossary | फीस | fee pay charge
+- glossary | शुल्क | fee pay charge
+- glossary | मातृत्व | maternity maternity leave benefit
+- glossary | प्रसूति | maternity delivery childbirth
+- glossary | प्रसव | maternity delivery childbirth
+- glossary | डिलीवरी | maternity delivery childbirth
+- glossary | गर्भवती | pregnant pregnancy maternity
+- glossary | गर्भ | pregnant pregnancy maternity
+- glossary | गर्भावस्था | pregnant pregnancy maternity
+- glossary | प्रेग्नेंट | pregnant pregnancy maternity
+- glossary | प्रेग्नेंसी | pregnant pregnancy maternity
+- glossary | पेट से | pregnant pregnancy maternity
+- glossary | बच्चा | child delivery maternity
+- glossary | बच्चे | child delivery maternity
+- glossary | बच्चा होने | child delivery maternity
+- glossary | निकाल | dismissed dismissal termination
+- glossary | निकाला | dismissed dismissal termination
+- glossary | निकालना | dismissed dismissal termination
+- glossary | नौकरी से | dismissed dismissal termination
+- glossary | यौन | sexual
+- glossary | उत्पीड़न | harassment complaint
+- glossary | उत्पीडन | harassment complaint
+- glossary | शोषण | harassment complaint
+- glossary | परेशान | harassment complaint
+- glossary | छेड़छाड़ | sexual harassment molestation complaint
+- glossary | छेड़खानी | sexual harassment molestation complaint
+- glossary | छेड़ा | sexual harassment molestation complaint
+- glossary | छेड़ | sexual harassment molestation complaint
+- glossary | छेडछाड | sexual harassment molestation complaint
+- glossary | छेडखानी | sexual harassment molestation complaint
+- glossary | छूता | touching sexual harassment
+- glossary | छुआ | touching sexual harassment
+- glossary | गंदी नजर | touching sexual harassment
+- glossary | छू | touching sexual harassment
+- glossary | छुआ | touching sexual harassment
+- glossary | बलात्कार | sexual harassment complaint police
+- glossary | रेप | sexual harassment complaint police
+- glossary | काम की जगह | workplace
+- glossary | कार्यस्थल | workplace
+- glossary | दफ्तर | workplace
+- glossary | ऑफिस | workplace
+- glossary | ऑफ़िस | workplace
+- glossary | आफिस | workplace
+- glossary | कारखाना | workplace
+- glossary | फैक्ट्री | workplace
+- glossary | समिति | committee internal local
+- glossary | कमेटी | committee internal local
+- glossary | घरेलू | domestic worker household
+- glossary | घर में काम | domestic worker household
+- glossary | घरों में | domestic worker household
+- glossary | बाई | domestic worker maid house help household
+- glossary | नौकरानी | domestic worker maid house help household
+- glossary | कामवाली | domestic worker maid house help household
+- glossary | कामवाली | domestic worker maid house help household
+- glossary | नौकर | domestic worker maid house help household
+- glossary | झाड़ू | domestic worker maid house help household
+- glossary | झाडू | domestic worker maid house help household
+- glossary | पोछा | domestic worker maid house help household
+- glossary | पोंछा | domestic worker maid house help household
+- glossary | बर्तन | domestic worker maid house help household
+- glossary | खाना बनाने | domestic worker maid house help household
+- glossary | रोक | withheld unpaid wages dues
+- glossary | रोके | withheld unpaid wages dues
+- glossary | रोका | withheld unpaid wages dues
+- glossary | रोककर | withheld unpaid wages dues
+- glossary | दबा | withheld unpaid wages dues
+- glossary | दबाकर | withheld unpaid wages dues
+- glossary | दबाए | withheld unpaid wages dues
+- glossary | टूट | injury accident insurance cover
+- glossary | टूटा | injury accident insurance cover
+- glossary | टूट गया | injury accident insurance cover
+- glossary | फ्रैक्चर | injury accident insurance cover
+- glossary | गिर गया | injury accident insurance cover
+- glossary | जख्मी | injury accident insurance cover
+- glossary | मदद | help benefits scheme
+- glossary | सहायता | help benefits scheme
+- glossary | मदद मिलेगी | help benefits scheme
+- glossary | सहयोग | help benefits scheme
+- glossary | कब मिलनी | payment date when paid wages
+- glossary | कब मिलेगी | payment date when paid wages
+- glossary | कब मिलेगा | payment date when paid wages
+- glossary | कब मिलता | payment date when paid wages
+- glossary | कब देना | payment date when paid wages
+- glossary | कब देते | payment date when paid wages
+- glossary | रोज | daily wage
+- glossary | रोज़ | daily wage
+- glossary | रोजाना | daily wage
+- glossary | हर दिन | daily wage
+- glossary | देर तक | overtime extra hours
+- glossary | ज्यादा देर | overtime extra hours
+- glossary | ज्यादा घंटे | overtime extra hours
+- glossary | बहुत देर | overtime extra hours
+- glossary | एक्स्ट्रा | overtime extra hours
+- glossary | अलग से पैसे | overtime extra hours
+- glossary | साहब | employer
+- glossary | मैनेजर | employer
+- glossary | सुपरवाइजर | employer
+- glossary | मुनीम | employer
+- glossary | हटा दिया | dismissed dismissal termination
+- glossary | हटाया | dismissed dismissal termination
+- glossary | काम से हटा | dismissed dismissal termination
+- glossary | उम्मीद से | pregnant pregnancy maternity
+- glossary | गलत तरीके | harassment complaint
+- glossary | गलत नजर | harassment complaint
+- glossary | सरकारी | government scheme benefits
+- glossary | सरकार | government scheme benefits
+- glossary | हेल्पलाइन | helpline helpdesk phone number contact
+- glossary | हेल्प लाइन | helpline helpdesk phone number contact
+- glossary | हेल्पडेस्क | helpline helpdesk phone number contact
+- glossary | नंबर | helpline helpdesk phone number contact
+- glossary | टोल फ्री | helpline helpdesk phone number contact
+- glossary | कानून | law legal
+- glossary | क़ानून | law legal
+- glossary | कानूनी | law legal
+- glossary | वकील | legal advice lawyer court case
+- glossary | कानूनी सलाह | legal advice lawyer court case
+- glossary | अदालत | legal advice lawyer court case
+- glossary | कोर्ट | legal advice lawyer court case
+- glossary | मुकदमा | legal advice lawyer court case
+- glossary | केस | legal advice lawyer court case
+- glossary | श्रम विभाग | labour office authority department
+- glossary | लेबर ऑफिस | labour office authority department
+- glossary | लेबर विभाग | labour office authority department
+- glossary | अधिकार | right entitled
+- glossary | हक | right entitled
+- glossary | हक़ | right entitled
+- glossary | कैसे | how
+- glossary | कहाँ | where
+- glossary | कहां | where
+- glossary | क्या | (ignored filler word)
+
+## Hindi stopwords in `retrieval.py` (`_HI_STOP`): ignored words (pronouns, particles, common verbs)
+
+- stopwords | अगर आप आपका इस उस एक और कर करना कराना करूँ करूं करें करो का कि की कुछ के को कोई कौन कौनसा क्या गई गए गया चाहता चाहती चाहिए जाता जाती जाते जी जो तक तीन तुम तो था थी थे दिया दी दे दें देता देती दो न नहीं ना ने पर बहुत भी मुझको मुझे में मेरा मेरी मेरे मैं यह या ये रहा रही रहे लिए लिये लेकिन वह वो सकता सकती सकते सा साथ से हम हमारा हमें ही हु हूँ हूं है हैं हो होता होती होते होना
+
+## Test queries in `app/backend/tests/fixtures/queries_fixture.json` and `tests/test_retrieval.py` (worker-style questions; expected card id in brackets)
+
+- test query | मेरे ठेकेदार ने तीन महीने से मजदूरी नहीं दी | expected ['W-03']
+- test query | न्यूनतम मजदूरी कितनी होनी चाहिए | expected ['W-01', 'W-07']
+- test query | मैं दिहाड़ी मजदूर हूँ क्या मुझे न्यूनतम वेतन मिलेगा | expected ['W-07', 'W-01']
+- test query | ई-श्रम कार्ड कैसे बनवाएं | expected ['S-01']
+- test query | क्या ई-श्रम में रजिस्ट्रेशन के पैसे लगते हैं | expected ['S-01']
+- test query | बुढ़ापे में पेंशन कैसे मिलेगी | expected ['S-02']
+- test query | ओवरटाइम का पैसा कितना मिलता है | expected ['W-06']
+- test query | गर्भवती महिला को छुट्टी और पैसे मिलते हैं क्या | expected ['M-01']
+- test query | काम की जगह पर मेरे साथ छेड़छाड़ हुई शिकायत कहाँ करूँ | expected ['H-01']
+- test query | मालिक तनख्वाह से पैसे काट लेता है | expected ['W-04']
+- test query | मैं घरों में झाड़ू पोछा करती हूँ मेरे लिए कौन सा कानून है | expected ['D-01', 'D-02']
+- test query | निर्माण मजदूर का लेबर कार्ड कैसे बनता है | expected ['S-05']
+- test query | दुर्घटना में मौत होने पर बीमा मिलता है क्या | expected ['S-03']
+- test query | 14434 नंबर पर क्या मदद मिलती है | expected ['X-01']
+- test query | औरतों को आदमियों के बराबर मजदूरी क्यों नहीं मिलती | expected ['W-05']
+- test query | मजदूरी कब तक मिल जानी चाहिए | expected ['W-02']
+- test query | मुझे शेयर बाजार में पैसे कैसे लगाने चाहिए | expected out of scope
+- test query | ठेकेदार पिछले दो महीने की दिहाड़ी दबाकर बैठा है | expected ['W-03']
+- test query | हमें सरकार की तरफ से बुढ़ापे में हर महीने पैसा कैसे मिलेगा | expected ['S-02']
+- test query | काम करते हुए हाथ टूट गया तो सरकार से कुछ मिलेगा क्या | expected ['S-03', 'S-05']
+- test query | मालिक ने बिना बताए मेरी पगार में से पैसे काट लिए | expected ['W-04']
+- test query | बच्चा होने के बाद दुकान वाले ने काम से हटा दिया | expected ['M-01']
+- test query | साहब ने मुझे गलत तरीके से छुआ, मैं किसको बताऊँ | expected ['H-01']
+- test query | क्या घर में काम करने वालों के लिए अलग से कोई कानून बना है | expected ['D-01']
+- test query | मुझे अपने राज्य में रोज की कितनी मजदूरी मिलनी चाहिए | expected ['W-01', 'W-07']
+- test query | इस हेल्पलाइन पर फोन करके मजदूरी का केस दर्ज हो सकता है क्या | expected ['X-01', 'W-03']
+- test query | मेरे गाँव में बिजली का बिल बहुत ज्यादा आया है | expected out of scope
+- test query | पिछले तीन साल से मेरी बकाया रकम नहीं मिली, अब भी दावा कर सकता हूँ? | expected ['W-03']
+- test query | मुझे ओवरटाइम करने के बाद दोगुना पैसा मिलना चाहिए ना | expected ['W-06']
+- test query | ई-श्रम पर नाम लिखवाने के लिए किसी को रिश्वत देनी पड़ेगी क्या | expected ['S-01']
+- test query | मेरी बीवी पेट से है, कंपनी छुट्टी नहीं दे रही | expected ['M-01']
+- test query | फैक्ट्री में सुपरवाइजर गंदी बातें करता है और हाथ लगाता है | expected ['H-01']
+- test query | मैं राजमिस्त्री हूँ, मेरे लिए कौन सी सरकारी योजना है | expected ['S-05']
+- test query | बुजुर्ग होने पर हर महीने तीन हजार रुपये वाली स्कीम कौन सी है | expected ['S-02']
+- test query | बच्चों के स्कूल की फीस कितनी होती है | expected out of scope
+- test_retrieval.py | मेरे ठेकेदार ने तीन महीने से मजदूरी नहीं दी / ई-श्रम कार्ड कैसे बनवाएं / बुढ़ापे में पेंशन कैसे मिलेगी / गर्भवती महिला को छुट्टी और पैसे मिलते हैं क्या / ओवरटाइम का पैसा / मज़दूरी / मजदूरों की मजदूरी | same as above

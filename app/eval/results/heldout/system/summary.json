@@ -1,0 +1,68 @@
+{
+  "mode": "system",
+  "meta": {
+    "run_id": "20260927-025007",
+    "questions_file": "F:\\College\\SEM5\\BFWAI Hackathon\\app\\eval\\questions.jsonl",
+    "cards_file": "F:\\College\\SEM5\\BFWAI Hackathon\\app\\data\\cards\\cards.json",
+    "mode": "system",
+    "aborted": false,
+    "adapted_ids": [],
+    "provider": null,
+    "retrieval": null
+  },
+  "metrics": {
+    "n_questions": 30,
+    "behavior_accuracy": {
+      "num": 29,
+      "den": 30,
+      "value": 0.9666666666666667
+    },
+    "false_refusal_rate": {
+      "num": 1,
+      "den": 22,
+      "value": 0.045454545454545456
+    },
+    "refusal_on_out_of_scope": {
+      "num": 5,
+      "den": 5,
+      "value": 1.0
+    },
+    "answered_out_of_scope": {
+      "num": 0,
+      "den": 5,
+      "value": 0.0
+    },
+    "citation_validity": {
+      "num": 20,
+      "den": 20,
+      "value": 1.0
+    },
+    "expected_card_hit": {
+      "num": 19,
+      "den": 21,
+      "value": 0.9047619047619048
+    },
+    "required_facts_hit": {
+      "num": 20,
+      "den": 21,
+      "value": 0.9523809523809523
+    },
+    "forbidden_violations": {
+      "count": 0,
+      "den": 30,
+      "ids": []
+    },
+    "wrong_citation_on_refusal": {
+      "count": 0,
+      "ids": []
+    },
+    "errors": {
+      "count": 0,
+      "ids": []
+    },
+    "latency_ms_p50": 1629.2118999990635,
+    "latency_ms_p95": 2922.3140999965835,
+    "total_cost_inr": 1.7132,
+    "cost_per_question_inr": 0.05710666666666667
+  }
+}

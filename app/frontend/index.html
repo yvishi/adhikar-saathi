@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12324F">
+  <title>अधिकार साथी | Adhikar Saathi</title>
+  <meta name="description" content="Hindi voice assistant that explains workers' rights and welfare schemes.">
+  <!-- Fonts are optional: if offline, the stack falls back to Nirmala UI / system Devanagari fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main" id="skip-link"></a>
+
+  <header class="top no-print">
+    <div class="top-inner">
+      <div class="brand">
+        <span class="brand-hi" id="brand-hi"></span>
+        <span class="brand-en" id="brand-en"></span>
+      </div>
+      <a class="helpline" href="tel:14434" id="helpline">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+        <span class="helpline-text"><strong>14434</strong><small data-s="helpline.sub"></small></span>
+      </a>
+    </div>
+    <div class="hazard" aria-hidden="true"></div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ASK -->
+    <section id="view-ask" class="view" aria-labelledby="ask-title">
+      <div id="stage" class="stage" data-state="idle">
+        <h1 id="ask-title" class="title" data-s="home.title"></h1>
+        <div class="mic-wrap">
+          <svg class="dial" id="dial" viewBox="0 0 240 240" aria-hidden="true" focusable="false"></svg>
+          <button type="button" id="mic" class="mic">
+            <svg class="ic-mic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a1 1 0 0 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 0 1 2 0 6 6 0 0 0 12 0z"/></svg>
+            <svg class="ic-stop" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <p id="mic-status" class="mic-status" role="status" aria-live="polite"></p>
+        <p id="mic-timer" class="mic-timer" aria-hidden="true"></p>
+      </div>
+
+      <form id="text-form" class="text-form no-print" autocomplete="off" novalidate>
+        <label for="text-input" class="text-label" data-s="home.orType"></label>
+        <div class="text-row">
+          <input id="text-input" name="text" type="text" enterkeyhint="send" maxlength="500" lang="hi">
+          <button type="submit" class="btn btn-primary btn-send" id="send-btn"></button>
+        </div>
+        <label class="check" for="want-audio">
+          <input type="checkbox" id="want-audio" checked>
+          <span data-s="home.voiceReply"></span>
+        </label>
+      </form>
+
+      <div id="result" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- SCHEMES -->
+    <section id="view-schemes" class="view" aria-labelledby="sch-title" hidden>
+      <h1 id="sch-title" class="title" data-s="sch.title"></h1>
+      <div id="sch-body"></div>
+    </section>
+
+    <!-- COMPLAINT -->
+    <section id="view-complaint" class="view" aria-labelledby="cmp-title" hidden>
+      <h1 id="cmp-title" class="title no-print" data-s="cmp.title"></h1>
+      <div id="cmp-form-wrap" class="no-print">
+        <p class="lead" data-s="cmp.intro"></p>
+        <form id="cmp-form" class="form" novalidate></form>
+      </div>
+      <div id="cmp-result" aria-live="polite"></div>
+    </section>
+
+    <footer class="notices no-print" id="notices">
+      <p class="notice" id="notice-legal"></p>
+      <p class="notice" id="notice-privacy"></p>
+      <button type="button" class="judge-toggle" id="judge-toggle" role="switch" aria-checked="false">
+        <span class="switch" aria-hidden="true"></span>
+        <span id="judge-label"></span>
+      </button>
+    </footer>
+  </main>
+
+  <nav class="tabs no-print" id="tabs" aria-label="Main"></nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

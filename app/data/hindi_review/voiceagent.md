@@ -1,0 +1,5 @@
+# Hindi strings written by voiceagent (please verify)
+- app/voiceagent/greeting.txt (Sarvam Voice Agent "Greeting" field, spoken at the start of every call): नमस्ते, मैं अधिकार साथी हूँ। आप मुझसे मज़दूरी, सरकारी योजनाओं, मातृत्व लाभ या काम पर होने वाली परेशानी के बारे में पूछ सकते हैं। बताइए, आपका सवाल क्या है?
+- app/voiceagent/instructions.md TOOL FAILURE fallback line (spoken only if the ask_adhikar_saathi tool call errors or returns nothing usable; also reused as the agent's own "यह जानकारी है, कानूनी सलाह नहीं।" guardrail line): मुझे नहीं पता, कृपया 14434 पर संपर्क करें।
+- app/voiceagent/instructions.md guardrail line (spoken only if the caller asks whether this is legal advice): यह जानकारी है, कानूनी सलाह नहीं।
+- Note: the substantive spoken answer in normal operation is always `answer_hi` from our own /api/ask, already reviewed under app/data/hindi_review/backend-core.md and the eval set; this file only covers the NEW strings the voice-agent layer itself introduces (greeting + the two fixed fallback lines).

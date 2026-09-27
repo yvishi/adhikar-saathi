@@ -1,0 +1,490 @@
+[
+  {
+    "id": "W-01",
+    "topic": "wages",
+    "title_en": "Minimum wage is a legal right",
+    "text_en": "No employer may pay you less than the minimum rate of wages notified by the government. This is section 5 of the Code on Wages, 2019. The government fixes the rate mainly by the skill level of the work and by the area, so the exact rate depends on what work you do and where. If you were paid less, you can file a claim for the shortfall (see the card on claiming unpaid wages).",
+    "text_hi": null,
+    "keywords_en": [
+      "minimum wage",
+      "paid less than minimum wage",
+      "daily wage rate",
+      "how much should I be paid",
+      "salary less than government rate",
+      "kam se kam mazdoori"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019",
+      "section": "s.5",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/c328da14bbb15fc4ad571dc33e7a4ab3.pdf",
+      "file": "app/data/sources/wages_code_labourgov.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "No rupee figures on purpose: state-wise minimum wage rates are notified separately and no official file was obtained. Section 6(6) (skill and geographical area) supports the sentence on how the rate is fixed. Claim route is s.45 (see W-03). Commencement date of the Wages Code is not stated in the gazette file itself: see GAPS.md.",
+    "evidence": "No employer shall pay to any employee wages less than the minimum rate of wages"
+  },
+  {
+    "id": "W-02",
+    "topic": "wages",
+    "title_en": "When your wages must be paid",
+    "text_en": "Under section 17 of the Code on Wages, 2019, your employer must pay you on time. If you are paid daily, you must be paid at the end of the shift. If you are paid weekly, you must be paid on the last working day before the weekly holiday; if fortnightly, before the end of the second day after the fortnight; if monthly, before the end of the seventh day of the next month. If you are removed, dismissed, retrenched or you resign, your wages must be paid within two working days.",
+    "text_hi": null,
+    "keywords_en": [
+      "when should I get my salary",
+      "wages not paid on time",
+      "daily wage paid at end of day",
+      "salary delay",
+      "weekly wages",
+      "monthly salary date",
+      "paid after resigning",
+      "final settlement"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019",
+      "section": "s.17(1) and (2)",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/c328da14bbb15fc4ad571dc33e7a4ab3.pdf",
+      "file": "app/data/sources/wages_code_labourgov.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Read from the gazette. s.17(3) lets the government set a different time limit where it considers it reasonable, and s.17(4) keeps time limits in other laws; the card states the default rule only. Weekly/fortnightly/monthly wording follows s.17(1)(ii) to (iv) ('before the expiry of the seventh day' is written here as 'before the end of the seventh day').",
+    "evidence": "daily basis, at the end of the shift"
+  },
+  {
+    "id": "W-03",
+    "topic": "wages",
+    "title_en": "Claiming unpaid wages within three years",
+    "text_en": "If your employer has not paid your wages, you can file a claim with the authority the government appoints under section 45 of the Code on Wages, 2019. You can file it yourself, through a registered trade union you belong to, or through the Inspector-cum-Facilitator. The application must be made within three years from the date the claim arises, and a later one can still be accepted if you show a good reason for the delay. The authority can also order compensation of up to ten times the claim, and once a claim is filed the employer has to prove that the dues were paid.",
+    "text_hi": null,
+    "keywords_en": [
+      "employer not paying wages",
+      "unpaid wages",
+      "how to complain about salary not paid",
+      "wage claim",
+      "how long to file claim",
+      "owner did not pay my money",
+      "labour office complaint",
+      "pending payment"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019",
+      "section": "s.45(1), (2), (4), (6); s.59",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/c328da14bbb15fc4ad571dc33e7a4ab3.pdf",
+      "file": "app/data/sources/wages_code_labourgov.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Gazette numbering: claims and the three-year limit are s.45 (s.45(6) and its proviso); the burden of proof on the employer is s.59. PIB summary confirms the three-year limit. The authority (name, address) differs by state and is not in the source, so the card does not name an office. Compensation multiple 'ten times' is s.45(2) ('may extend to').",
+    "evidence": "may be filed within a period of three years"
+  },
+  {
+    "id": "W-04",
+    "topic": "wages",
+    "title_en": "Deductions from your wages",
+    "text_en": "Under section 18 of the Code on Wages, 2019, your employer cannot cut anything from your wages unless the Code allows it, and any payment you make to the employer or his agent counts as a deduction. Allowed deductions include fines, absence from duty, damage or loss of goods given to you to look after (when it is directly due to your neglect or default), housing supplied by the employer, advances and loans, income tax, and provident fund or insurance contributions. All deductions together in a wage period cannot be more than 50 per cent of your wages. A fine cannot be more than 3 per cent of your wages for that wage period.",
+    "text_hi": null,
+    "keywords_en": [
+      "salary cut",
+      "employer deducted money",
+      "deduction from wages",
+      "fine cut from pay",
+      "advance recovered from salary",
+      "can boss cut my pay",
+      "how much can be deducted",
+      "money deducted without reason"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019",
+      "section": "s.18(1)-(3); s.19(4)",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/c328da14bbb15fc4ad571dc33e7a4ab3.pdf",
+      "file": "app/data/sources/wages_code_labourgov.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Not every allowed purpose in s.18(2) is listed (also trade union fees and PM Relief Fund with written authorisation, co-operative society dues, railway-specific losses). s.18(4) allows the excess over 50% to be recovered 'in such manner as may be prescribed'. Fine cap 3% is s.19(4). PIB says timely-payment and deduction rules now apply to all employees regardless of wage ceiling.",
+    "evidence": "there shall be no deductions from the wages of the employee"
+  },
+  {
+    "id": "W-05",
+    "topic": "wages",
+    "title_en": "No gender discrimination in pay",
+    "text_en": "Under section 3 of the Code on Wages, 2019, an employer cannot pay employees differently on the ground of gender for the same work or work of a similar nature. The employer also cannot lower anyone's wage rate to meet this rule, and cannot discriminate on the ground of sex when recruiting for the same work, except where the law prohibits or restricts women's employment in that work. If you think you are paid less for similar work because of your gender, this is a matter you can bring as a claim under the Code (see the card on claiming unpaid wages).",
+    "text_hi": null,
+    "keywords_en": [
+      "women paid less than men",
+      "equal pay for equal work",
+      "gender discrimination in wages",
+      "man and woman same work different pay",
+      "female labourer lower wage",
+      "equal wages"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019",
+      "section": "s.3(1), (2); s.4",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/c328da14bbb15fc4ad571dc33e7a4ab3.pdf",
+      "file": "app/data/sources/wages_code_labourgov.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "s.4 says disputes on whether work is 'same or similar' are decided by an authority notified by the government. s.57 refers to 'discrimination in wages' claims under s.45, which supports the last sentence. PIB says s.3 also covers transgender identity; not repeated in the card because the gazette text says 'gender'/'sex' only.",
+    "evidence": "employees on the ground of gender in matters relating to wages by the same employer"
+  },
+  {
+    "id": "W-06",
+    "topic": "wages",
+    "title_en": "Overtime pay is at least double",
+    "text_en": "If your wage is fixed by the hour or by the day and you work more hours than a normal working day, your employer must pay you for every extra hour, or part of an hour, at an overtime rate that is not less than twice your normal rate of wages. This is section 14 of the Code on Wages, 2019. The government decides how many hours make a normal working day. If you were not paid this, you can claim the shortfall under the Code (see the card on claiming unpaid wages).",
+    "text_hi": null,
+    "keywords_en": [
+      "overtime pay",
+      "extra hours work payment",
+      "double wages for overtime",
+      "worked more than 8 hours",
+      "duty after shift pay",
+      "overtime rate",
+      "extra work no extra money"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019",
+      "section": "s.14; s.13(1)(a)",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/c328da14bbb15fc4ad571dc33e7a4ab3.pdf",
+      "file": "app/data/sources/wages_code_labourgov.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Gazette numbering: overtime is s.14 (s.13 lets the government fix normal working hours and days of rest). PIB also states s.14 and 'twice the normal wages'. Working-hour limits (PIB: 48 hours a week under s.13 read with Rule 6) are not in the card: the rule was not read in the sources beyond the PIB summary.",
+    "evidence": "shall not be less than twice the normal rate of wages"
+  },
+  {
+    "id": "W-07",
+    "topic": "wages",
+    "title_en": "Minimum wage covers daily wagers and unorganised workers",
+    "text_en": "The minimum wage rule now covers every employee, in both organised and unorganised work. Before this Code, minimum wages applied only to scheduled employments, covering roughly 30 per cent of workers. So casual workers, daily wagers and migrant labourers are covered by the minimum wage right in section 5 of the Code on Wages, 2019.",
+    "text_hi": null,
+    "keywords_en": [
+      "daily wager minimum wage",
+      "casual labour minimum wage",
+      "unorganised worker minimum wage",
+      "migrant worker wages",
+      "does minimum wage apply to me",
+      "informal worker pay right"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Wages, 2019 (PIB explainer, 23 Nov 2025)",
+      "section": "s.5 (as explained by PIB)",
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251123703501.pdf",
+      "file": "app/data/sources/labour_codes_pib.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Source is the PIB explainer (official government summary); the operative rule is s.5 of the gazette (see W-01). The PIB text names 'casual employee, daily wagers, and migrant labourers' as beneficiaries. The 30 per cent figure is quoted from the PIB text.",
+    "evidence": "establishes a statutory right to minimum wages for all employees, extending its coverage to every sector, both organised and unorganised"
+  },
+  {
+    "id": "S-01",
+    "topic": "schemes",
+    "title_en": "e-Shram registration for unorganised workers",
+    "text_en": "Unorganised workers aged 16 or above who are not income tax payers and not members of EPFO or ESIC can register on the e-Shram portal (eshram.gov.in) or at a Common Service Centre or State Seva Kendra. Registration is free and no one may charge you for it; you need your Aadhaar number and an Aadhaar-linked mobile number, and you get a permanent 12-digit UAN. Right now registration itself gives no cash benefit; the database is meant to help deliver government schemes to you. For e-Shram questions you can call the helpdesk on 14434.",
+    "text_hi": null,
+    "keywords_en": [
+      "e-Shram card",
+      "register unorganised worker",
+      "e-Shram registration free",
+      "labour card online",
+      "UAN number for workers",
+      "how to register on eshram",
+      "eshram documents needed",
+      "Aadhaar mobile registration worker"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "e-Shram FAQs",
+      "section": "Q3, Q10, Q11, Q12, Q15, Q42",
+      "url": "https://eshram.gov.in/faqs",
+      "file": "app/data/sources/eshram_faq.html"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Live FAQ wording used. Age: live FAQ Q11 says 16 years or above; the older brochure (eshram_intro.pdf) says 16-59. No income limit, but an income tax payee should not register (Q10). Q42: 'Right now, only registration is being done through e-Shram', so no benefit (incl. accident insurance) is presented as current: see S-03 and GAPS.md. Contract fact about PMSBY cover deliberately not used here per lead's correction.",
+    "evidence": "Registration on e-Shram portal is free."
+  },
+  {
+    "id": "S-02",
+    "topic": "schemes",
+    "title_en": "PM-SYM pension for unorganised workers",
+    "text_en": "The Pradhan Mantri Shram Yogi Maandhan (PM-SYM) scheme is for unorganised workers who join between the ages of 18 and 40 and earn up to Rs 15,000 a month. It is a voluntary, contributory pension scheme in which the Government of India adds a matching contribution. It gives an assured pension of Rs 3,000 a month at age 60. Details and enrolment are on the Maandhan website (maandhan.in), and the helpline numbers shown there are 14434 and 18002676888.",
+    "text_hi": null,
+    "keywords_en": [
+      "pension for labourers",
+      "PM-SYM",
+      "Shram Yogi Maandhan",
+      "old age pension unorganised worker",
+      "3000 pension at 60",
+      "pension scheme for daily wage workers",
+      "maandhan"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "PM-SYM (Maandhan portal)",
+      "section": "Eligibility and Features",
+      "url": "https://maandhan.in/",
+      "file": "app/data/sources/pmsym.html"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "How much the worker must contribute is NOT stated (contribution chart not in source). Other exclusions (for example EPFO/ESIC/NPS membership) are not in the file, so the card says nothing about them: check on the portal. Site says 'Revamping of Maandhan portal is under process'.",
+    "evidence": "Entry Age between 18 to 40 years"
+  },
+  {
+    "id": "S-03",
+    "topic": "schemes",
+    "title_en": "Accident insurance (PMSBY) through e-Shram: confirm first",
+    "text_en": "Older e-Shram material says that workers who register on e-Shram get an accidental insurance cover of 2 lakh rupees under PMSBY. But the current e-Shram FAQ says that right now only registration is being done through e-Shram and gives no cash benefit. So do not count on this cover until it is confirmed. You can ask the e-Shram helpdesk on 14434.",
+    "text_hi": null,
+    "keywords_en": [
+      "accident insurance",
+      "PMSBY",
+      "2 lakh insurance",
+      "e-Shram insurance cover",
+      "accidental death cover worker",
+      "suraksha bima labour"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "e-Shram introduction brochure (older) and current e-Shram FAQs",
+      "section": "brochure item 8; FAQ Q42",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3dcf6070a4ab7f3afbfd2809173e0824b/uploads/2025/09/20250915599696211.pdf",
+      "file": "app/data/sources/eshram_intro.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "HEDGED ON PURPOSE. The brochure (eshram_intro.pdf) says 'After registering, he/she will get an Accidental Insurance cover of 2 Lacs under PMSBY'. The live FAQ (https://eshram.gov.in/faqs) Q42 says 'Right now, only registration is being done through e-Shram.' and the PMSBY questions (Q21 'How PMSBY is associated with eSHRAM', Q40, Q51) are inside HTML comments in the saved page, i.e. withdrawn from the live page. Owner: confirm with the helpdesk or Ministry before removing the hedge. The commented-out FAQ said PMSBY through e-Shram needed age 18-59: not used.",
+    "evidence": "Accidental Insurance cover of 2 Lacs"
+  },
+  {
+    "id": "S-04",
+    "topic": "schemes",
+    "title_en": "Code on Social Security covers unorganised and domestic workers",
+    "text_en": "The Code on Social Security, 2020 provides for social security to all unorganised workers, including domestic workers. Central schemes the Labour Ministry names for such workers include PMJJBY and PMSBY (life and disability cover), PM-SYM (pension) and Ayushman Bharat PM-JAY health cover of Rs 5 lakh per family per year for eligible vulnerable families. The e-Shram portal is open for registering unorganised workers, including domestic and household workers. Each scheme has its own eligibility rules.",
+    "text_hi": null,
+    "keywords_en": [
+      "social security for unorganised workers",
+      "social security code",
+      "domestic worker benefits",
+      "Ayushman Bharat for workers",
+      "insurance scheme for labourers",
+      "government schemes for daily wage workers"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "PIB note on Code on Social Security, 2020 (20 Mar 2023)",
+      "section": "Lok Sabha written reply",
+      "url": "https://www.labour.gov.in/static/uploads/2025/06/a4bedaad1338617c04c6f1ab5350f170.pdf",
+      "file": "app/data/sources/labour_gov_doc.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Source is a PIB release of 20 Mar 2023 (a Lok Sabha reply). It says the Unorganised Workers' Social Security Act 2008 was 'now subsumed' in the Code; the gazette copy of the Code saved as social_security_code_indiacode.pdf shows the repeal of that Act in force from 21 Nov 2025 (s.164 and footnote to s.1). The PIB reply mentions PMSBY as a scheme; it does not say e-Shram registration gives PMSBY cover.",
+    "evidence": "provides for social security to all unorganized workers including domestic workers"
+  },
+  {
+    "id": "S-05",
+    "topic": "schemes",
+    "title_en": "Construction workers: welfare board registration",
+    "text_en": "If you do building or construction work, you can be registered as a beneficiary by an officer authorised by your state's Building and Other Construction Workers' Welfare Board. You must be at least 18 and under 60 years old, and have worked in building or construction for at least ninety days in the last twelve months (Code on Social Security, 2020, section 106). The Board is meant to provide death and disability benefits, pension after age 60, medical help for major ailments, maternity benefit and schemes for children's education, paid from a welfare fund built from a cess on construction. Exact benefits and amounts are set by rules and state schemes, so ask your state Welfare Board.",
+    "text_hi": null,
+    "keywords_en": [
+      "construction worker registration",
+      "BOCW card",
+      "building worker welfare board",
+      "labour card for construction workers",
+      "mistri mazdoor benefits",
+      "construction cess benefits",
+      "builder site worker pension",
+      "welfare board registration"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Social Security, 2020",
+      "section": "s.106, s.107, s.108, s.7(6), s.100",
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/16823/1/aA2020-36.pdf",
+      "file": "app/data/sources/social_security_code_indiacode.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "The 1996 BOCW Cess Act is repealed by s.164(1) item 8 of the Code on Social Security, and Chapter VIII (ss.100-108) of the Code now covers cess, beneficiary registration and the Welfare Fund; the footnote to s.1 shows ss.1-163 (with exceptions) and s.164 items 1,2,4-9 in force from 21 Nov 2025. NO benefit amounts are in the Code (they are 'as may be prescribed' or in state schemes), so none are stated. s.107(2): someone registered 3 continuous years before turning 60 is eligible for prescribed benefits. Definition s.2(6) excludes some small works (fewer than ten workers in the preceding twelve months; own-residence work up to Rs 50 lakh): a worker on such jobs may not qualify, so the card tells them to ask the Board. The 1996 BOCW (Regulation of Employment) Act itself was not used; its fate under the OSH Code was not verified: see GAPS.md.",
+    "evidence": "has been engaged in any building or other construction work for not less than ninety days during the preceding twelve months"
+  },
+  {
+    "id": "M-01",
+    "topic": "maternity",
+    "title_en": "Maternity benefit for women workers",
+    "text_en": "If you work in a factory, mine or plantation, or in a shop or establishment where ten or more people work or worked on any day in the last twelve months, and you have actually worked at least 80 days in the twelve months before your expected delivery, your employer must pay you maternity benefit at the rate of your average daily wage. It is paid for up to 26 weeks, of which not more than 8 weeks are before the expected delivery; if you already have two or more surviving children it is 12 weeks. Your employer cannot dismiss you for being absent under these rules, and if the benefit is withheld you can complain to the Inspector-cum-Facilitator. If you do not qualify, ask about schemes for unorganised workers, which the Code says can include maternity benefits.",
+    "text_hi": null,
+    "keywords_en": [
+      "maternity leave",
+      "pregnant worker rights",
+      "maternity benefit",
+      "paid leave for delivery",
+      "can employer fire pregnant woman",
+      "how many weeks maternity leave",
+      "pregnancy leave wages",
+      "delivery leave"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Social Security, 2020",
+      "section": "Chapter VI, ss.59-60, 62, 68, 72; s.109(1)(ii); First Schedule",
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/16823/1/aA2020-36.pdf",
+      "file": "app/data/sources/social_security_code_indiacode.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "IMPORTANT: wb_maternity.pdf is the OLD Maternity Benefit Act 1961 text (12 weeks, pre-2017) and is superseded: s.164(1) item 5 of the Code on Social Security repeals that Act, in force from 21 Nov 2025 (footnote to s.1). The card therefore follows Chapter VI of the Code (indiacode copy, 'as on 21 Nov 2025'). This closes the 2017-amendment gap: 26 weeks / 8 weeks before / 12 weeks for two or more surviving children (s.60(3)), 80 days (s.60(2)), ten or more employees or factory/mine/plantation (First Schedule: 'and such other shops or establishments notified by the appropriate Government'). Also in the Code but not in the card: medical bonus of Rs 3,500 (s.64), 12 weeks for adopting/commissioning mothers (s.60(4)), 6 weeks' leave for miscarriage or MTP (s.65), creche in establishments with 50 employees (s.67). Complaint route is s.72; appeal against dismissal to the competent authority within sixty days is s.68(2).",
+    "evidence": "shall be twentysix weeks of which not more than eight weeks shall precede the expected date of her delivery"
+  },
+  {
+    "id": "H-01",
+    "topic": "harassment",
+    "title_en": "Sexual harassment at work: how to complain",
+    "text_en": "If a woman faces sexual harassment at work, she can make a written complaint within three months of the incident (or of the last incident, if there were several); the committee can allow up to three more months for a good reason, and if she cannot write it, committee members must help her put it in writing. If her workplace has an Internal Committee she complains to it. If there is none because the workplace has fewer than ten workers, or if the complaint is against the employer himself, she complains to the Local Committee that the District Officer sets up in each district, and a nodal officer in each block, taluka, tehsil or ward must forward complaints to it within seven days. This Act also covers women who work in a home, that is, domestic workers; for them the Local Committee, if there is a prima facie case, sends the complaint to the police within seven days.",
+    "text_hi": null,
+    "keywords_en": [
+      "sexual harassment at work",
+      "POSH complaint",
+      "Local Committee complaint",
+      "harassment by employer",
+      "how to complain about harassment",
+      "harassment domestic worker",
+      "Internal Committee",
+      "boss touching me"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+      "section": "s.2(a), (e), (g)(iv), (o)(vi); s.6; s.9; s.11(1)",
+      "url": "https://delhipolice.gov.in/doc/POSH/POSH_ActRulesSO.pdf",
+      "file": "app/data/sources/posh_act_2013_english_delhipolice.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "English Act text from a Delhi Police (government) copy, 'Last updated 31-8-2021'; retrieved 2026-09-27. Replaces the unreadable Hindi-font file. Section 2(a)(ii) ('a woman of any age who is employed in such a dwelling place or house'), 2(e) domestic worker, 2(g)(iv) and 2(o)(vi) show domestic workers ARE covered; the LiveLaw report of the SC judgment says domestic workers 'stand excluded' from the 2013 Act: the card follows the Act text (see GAPS.md). s.11(1) still refers to section 509 IPC (Indian Penal Code): not repeated in the card. s.9(1) time limit and extension are quoted exactly; s.6(2) nodal officer forwards within 'seven days'. No phone numbers or portal (SHe-Box) are stated because none is in a saved source.",
+    "evidence": "has not been constituted due to having less than ten workers or if the complaint is against the employer himself"
+  },
+  {
+    "id": "X-01",
+    "topic": "helpline",
+    "title_en": "Helpline 14434 is the e-Shram helpdesk",
+    "text_en": "14434 (also 18008896811) is the national helpdesk of the e-Shram portal run by the Ministry of Labour and Employment. It answers questions about e-Shram registration and e-Shram grievances, and it supports Hindi, English, Tamil, Bengali, Kannada, Malayalam, Marathi, Odia, Telugu and Assamese. The e-Shram website lists its hours as 9 am to 6 pm every day, including Sundays. The sources describe it only as an e-Shram helpdesk and do not say it takes wage or employer complaints.",
+    "text_hi": null,
+    "keywords_en": [
+      "14434",
+      "helpline number",
+      "e-Shram helpline",
+      "labour helpline",
+      "who to call for help",
+      "customer care e-Shram",
+      "toll free number for workers"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "e-Shram FAQs (Ministry of Labour and Employment)",
+      "section": "Q8, Q9, Q26; page header",
+      "url": "https://eshram.gov.in/faqs",
+      "file": "app/data/sources/eshram_faq.html"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "HOURS CONFLICT: live site (FAQ header and Q8/Q9) says 9.00 AM to 6.00 PM daily including Sundays; the older brochure eshram_intro.pdf says Monday to Saturday, 8am to 8pm. The card uses the live-site wording. The language list comes from the brochure (eshram_intro.pdf, item 9), not the FAQ. Grievance portal is gms.eshram.gov.in (Q9, Q26). pmsym.html also lists 14434 (and 18002676888) as the Maandhan helpline. Do NOT use this card to say 14434 handles wage claims.",
+    "evidence": "Helpdesk Number is 14434/18008896811 (9.00 AM to 6.00 PM - Daily including Sundays)"
+  },
+  {
+    "id": "X-02",
+    "topic": "meta",
+    "title_en": "What this assistant cannot do",
+    "text_en": "This is information, not legal advice. I can explain the rights and schemes in my cards, but I cannot judge your own case, fill in or file a complaint for you, or promise any result. For your own case, please go to your local labour office or a legal aid service, and use the e-Shram helpdesk 14434 only for e-Shram questions. Please do not tell me your name, Aadhaar number or phone number.",
+    "text_hi": null,
+    "keywords_en": [
+      "can you file a case for me",
+      "are you a lawyer",
+      "is this legal advice",
+      "what can you do",
+      "which court should I go to",
+      "will I win my case",
+      "what are your limits"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Adhikar Saathi product rules (CONTRACT.md section 9)",
+      "section": "s.9",
+      "url": null,
+      "file": "app/CONTRACT.md"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Fixed meta card, no legal claim. Deliberately no phone numbers except 14434 (the e-Shram helpdesk, per X-01). The 'local labour office' and 'legal aid service' referrals are generic, not sourced facts; owner may swap in a verified office name or helpline later.",
+    "evidence": "This is information, not legal advice."
+  },
+  {
+    "id": "D-01",
+    "topic": "domestic",
+    "title_en": "Domestic workers: no separate central law",
+    "text_en": "India has no separate central law made only for domestic workers. In January 2025 the Supreme Court asked the Union Government to consider such a law and to set up an expert committee, but that committee's report of July 2025 said a separate law is not needed because the four labour codes already cover domestic workers. Rights groups dispute this and say many domestic workers remain outside legal protection in practice. What protections apply depends on the general codes (see the card on the Code on Social Security) and on state rules; some states, such as Tamil Nadu and Maharashtra, have laws creating welfare boards for domestic workers.",
+    "text_hi": null,
+    "keywords_en": [
+      "domestic worker law",
+      "maid rights",
+      "household worker rights",
+      "is there a law for domestic workers",
+      "kaamwali rights",
+      "maid salary law",
+      "domestic helper legal protection"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Down To Earth report on the Supreme Court expert committee (18 Jan 2026); LiveLaw report of the order (29 Jan 2025)",
+      "section": "Supreme Court order of 29 Jan 2025; committee report July 2025",
+      "url": "https://www.downtoearth.org.in/governance/domestic-workers-do-not-need-a-separate-law-says-committee-formed-on-supreme-court-directions",
+      "file": "app/data/sources/p_dte.html"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "SECONDARY SOURCES (news reports), not the judgment or committee report themselves: see GAPS.md for what to download. The order date 29 Jan 2025 (SC asked for a committee; report in 6 months) is in p_livelaw_sc.html, which also reports the Tamil Nadu/Maharashtra welfare-board laws and the Kerala bill. LiveLaw says the court noted domestic workers are excluded from the Payment of Wages Act 1936, Equal Remuneration Act 1976 and the 2013 sexual harassment Act; the last statement conflicts with the text of the 2013 Act (see H-01), so the card does not repeat it. The committee's claim that the four codes cover domestic workers is the committee's view as reported and is contested (DTE).",
+    "evidence": "domestic workers do not require a separate law"
+  },
+  {
+    "id": "D-02",
+    "topic": "domestic",
+    "title_en": "Domestic workers under the Code on Social Security",
+    "text_en": "The Code on Social Security, 2020 counts workers employed by households, including domestic workers, as unorganised wage workers (the government may set a monthly wage limit for this). A worker who is 16 or older can register for its schemes with an Aadhaar number and a self-declaration, and self-registration is allowed. A registered worker can use the benefits of the schemes the government frames under the Code. The central government is to frame schemes for life and disability cover, health and maternity benefits and old age protection, and state governments for things like provident fund, housing and funeral assistance; what you get depends on each scheme's rules.",
+    "text_hi": null,
+    "keywords_en": [
+      "domestic worker social security",
+      "maid pension",
+      "household worker insurance",
+      "domestic worker registration",
+      "maid benefits government scheme",
+      "domestic worker health cover",
+      "registered domestic worker benefits"
+    ],
+    "keywords_hi": [],
+    "source": {
+      "name": "Code on Social Security, 2020",
+      "section": "s.2(90), (86); s.109; s.113",
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/16823/1/aA2020-36.pdf",
+      "file": "app/data/sources/social_security_code_indiacode.pdf"
+    },
+    "verified": true,
+    "status": "ready",
+    "notes": "Primary source: definition of 'wage worker' in s.2(90) (indiacode copy 'as on 21 Nov 2025'); registration s.113 (age sixteen 'or such age as may be prescribed', self-declaration, Aadhaar number, self-registration allowed); s.113(3): a registered worker is eligible for benefits of the concerned scheme; schemes s.109(1)-(2). The 'wage worker' definition includes 'with a monthly wage of an amount as may be notified': the amount is not known, hence the caveat. Consistent with the PIB 20 Mar 2023 note (labour_gov_doc.pdf) and S-04. e-Shram is not named in this card because the Code text does not name it.",
+    "evidence": "workers employed by households including domestic workers"
+  }
+]
