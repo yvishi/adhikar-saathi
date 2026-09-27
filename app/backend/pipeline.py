@@ -384,14 +384,21 @@ def ask(session_id: str | None = None, text: str | None = None, audio: tuple | N
         used_cards = [cards_by_id[i] for i in result["used_ids"]]
         if not _verify_supported(result["answer_en"], used_cards, provider, usage):
             result = postprocess(None, retrieved_ids)
+    # Whether `result["answer_hi"]` is actually model-generated text in the target language
+    # (an "answer", a "clarify" question, or even a "refuse" the model itself worded) versus the
+    # fixed, already-verified REFUSE_HI/REFUSE_EN fallback (used when no card was retrieved, the
+    # score was too low, or JSON parsing failed -- see postprocess()). Only the former needs the
+    # disclaimer and the LANG_VERIFY safety net; the fixed fallback is Hindi/English, verified,
+    # and showing it as-is (even when a non-Hindi language was requested) is the honest choice.
+    is_generated_text = result["answer_hi"] != prompts.REFUSE_HI
     # Safety net for languages nobody here can read (LANG_VERIFY=1): back-translate and check
     # for rough agreement with the model's own English gloss; fail closed. Heuristic, not a
     # guarantee -- see this agent's final report and _lang_verify_ok's docstring.
-    if (result["type"] in ("answer", "clarify") and languages.needs_disclaimer(lang_code)
-            and config.lang_verify() and not mock):
+    if is_generated_text and languages.needs_disclaimer(lang_code) and config.lang_verify() and not mock:
         ok, chars = _lang_verify_ok(result["answer_hi"], result["answer_en"], lang_code)
         translate_chars += chars
         if not ok:
+            is_generated_text = False  # the fallback text below is fixed Hindi/English again
             result = {"type": "refuse", "answer_hi": prompts.LANG_VERIFY_FAIL_HI,
                       "answer_en": prompts.LANG_VERIFY_FAIL_EN, "used_ids": []}
     lat["llm"] = int((time.perf_counter() - t0) * 1000)
@@ -438,7 +445,7 @@ def ask(session_id: str | None = None, text: str | None = None, audio: tuple | N
     # exactly the same response shape as before.
     if lang_code != languages.DEFAULT_LANGUAGE:
         resp["language"] = lang_code
-        if result["type"] in ("answer", "clarify"):
+        if is_generated_text:
             resp["disclaimer_en"] = prompts.lang_disclaimer_en(lang)
             resp["disclaimer_hi"] = prompts.LANG_DISCLAIMER_HI
     if config.debug_responses():

@@ -88,12 +88,16 @@ class Budget:
         return self.spent > self.max_inr
 
 
-def ask_system(base_url, sid, text, provider, retrieval, timeout):
+def ask_system(base_url, sid, text, provider, retrieval, timeout, language=None):
     form = {"session_id": (None, sid), "text": (None, text), "want_audio": (None, "false")}
     if provider:
         form["provider"] = (None, provider)
     if retrieval:
         form["retrieval"] = (None, retrieval)
+    if language:
+        # Needs one line in app/backend/main.py to actually reach the pipeline; see the
+        # multilingual agent's final report. Harmless no-op against a server that ignores it.
+        form["language"] = (None, language)
     err = None
     for attempt in range(3):
         t0 = time.perf_counter()
@@ -126,7 +130,8 @@ def run_one(q: dict, mode: str, ctx: dict) -> dict:
     final = {"type": "error", "text_hi": "", "text_en": "", "source_ids": [], "error": None}
     for user in q["turns"]:
         if mode == "system":
-            j, err, wall = ask_system(ctx["base_url"], sid, user, ctx["provider"], ctx["retrieval"], ctx["timeout"])
+            j, err, wall = ask_system(ctx["base_url"], sid, user, ctx["provider"], ctx["retrieval"], ctx["timeout"],
+                                       language=ctx.get("language"))
             walls.append(wall)
             if err or j is None:
                 final = {"type": "error", "text_hi": "", "text_en": "", "source_ids": [], "error": err}
@@ -330,6 +335,7 @@ def get_complete_fn():
 def build_ctx(args, budget, complete_fn=None, run_id=None):
     return {"base_url": args.base_url, "provider": args.provider, "retrieval": args.retrieval, "timeout": args.timeout,
             "budget": budget, "complete_fn": complete_fn, "judge": load_judge(args.judge),
+            "language": getattr(args, "language", None),
             "run_id": run_id or dt.datetime.now().strftime("%Y%m%d-%H%M%S")}
 
 
@@ -359,6 +365,15 @@ def main(argv=None):
     ap.add_argument("--mode", choices=["system", "baseline", "both"], default="system")
     ap.add_argument("--provider", default=None, help="sarvam|gemini|groq (system: sent to /api/ask; baseline: passed to complete())")
     ap.add_argument("--retrieval", default=None, help="topk|all (system only)")
+    ap.add_argument("--language", default=None,
+                     help="hi-IN|pa-IN|bn-IN|mr-IN (system only; sent to /api/ask as `language`). "
+                          "Needs a one-line change in app/backend/main.py to take effect (see the "
+                          "multilingual agent's final report); until then this is a harmless no-op. "
+                          "For any value other than hi-IN/en-IN, required_any/forbidden regex "
+                          "checks are written for Hindi/English wording and are NOT meaningful: "
+                          "read only behavior_accuracy, citation_validity, refusal_on_out_of_scope, "
+                          "latency and cost from the summary, and ignore required_facts_hit / "
+                          "forbidden_violations for that run.")
     ap.add_argument("--questions", default=str(DEFAULT_QUESTIONS))
     ap.add_argument("--cards", default=str(DEFAULT_CARDS))
     ap.add_argument("--limit", type=int, default=0)

@@ -183,6 +183,13 @@ body.judge .judge-only { display: block; }
 .judge-box b { color: var(--hat); font-family: var(--font-body); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
 .judge-box pre { margin: 6px 0 0; white-space: pre-wrap; word-break: break-word; }
 
+/* non-Hindi/non-English answer disclaimer: shown only when the server actually answered in
+   another language (see renderAnswer in app.js). English line is primary since English is
+   verified; the Hindi line beneath it is a secondary, generic note (see hindi_review). */
+.lang-disclaimer { background: var(--warn-bg); border-color: var(--warn); display: flex; gap: 12px; align-items: flex-start; }
+.lang-disclaimer svg { flex: none; color: var(--warn); margin-top: 2px; }
+.lang-disclaimer-en { margin: 0 0 4px; font-weight: 700; color: var(--warn); }
+.lang-disclaimer-hi { margin: 0; color: var(--warn); }
 .err-card { background: var(--bad-bg); border-color: var(--bad); box-shadow: 0 5px 0 var(--bad); }
 .err-card .err-title { color: var(--bad); font-weight: 800; font-size: 19px; }
 .err-card .err-title .en { display: inline; color: var(--bad); font-weight: 600; margin-left: 6px; }

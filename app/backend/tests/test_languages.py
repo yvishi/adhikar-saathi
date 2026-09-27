@@ -145,6 +145,31 @@ def test_mock_mode_ignores_language_and_never_calls_translate(monkeypatch):
     assert r["type"] in ("answer", "refuse", "clarify")
 
 
+def test_ask_other_language_model_refusal_still_gets_disclaimer(monkeypatch):
+    """A refusal the MODEL worded in the target language (e.g. an adversarial question that
+    reached the LLM) is just as unverified as an answer, so it still needs the disclaimer -
+    unlike the fixed REFUSE_HI/REFUSE_EN fallback used when the LLM was never called."""
+    patch_post(monkeypatch, {"/translate": FakeResp(200, {"translated_text": "state minimum wage", "source_language_code": "pa-IN"})})
+    fake_llm(monkeypatch, js(type="refuse", answer_hi="ਮੇਰੇ ਕੋਲ ਇਹ ਜਾਣਕਾਰੀ ਨਹੀਂ ਹੈ", answer_en="I do not have this information", used_ids=[]))
+    r = pipeline.ask(text="q", want_audio=False, retrieval="all", language="pa-IN")
+    assert r["type"] == "refuse"
+    assert r["answer_hi"] != prompts.REFUSE_HI
+    assert r["disclaimer_en"] and r["disclaimer_hi"] == prompts.LANG_DISCLAIMER_HI
+
+
+def test_ask_other_language_fixed_fallback_refusal_has_no_disclaimer(monkeypatch):
+    """When no card is retrieved at all the LLM is never called and the fixed, already-verified
+    REFUSE_HI/REFUSE_EN text is returned as-is (in Hindi/English) -- no disclaimer needed."""
+    patch_post(monkeypatch, {"/translate": FakeResp(200, {"translated_text": "q", "source_language_code": "pa-IN"})})
+    calls = fake_llm(monkeypatch)
+    monkeypatch.setattr(pipeline, "retrieve", lambda q, m, k=4: [])
+    r = pipeline.ask(text="q", want_audio=False, language="pa-IN")
+    assert r["type"] == "refuse" and calls == []
+    assert r["answer_hi"] == prompts.REFUSE_HI
+    assert r["language"] == "pa-IN"  # the language was still recorded...
+    assert "disclaimer_en" not in r and "disclaimer_hi" not in r  # ...but no false disclaimer
+
+
 # ---- LANG_VERIFY safety net
 def test_lang_verify_downgrades_on_low_overlap(monkeypatch):
     monkeypatch.setenv("LANG_VERIFY", "1")
