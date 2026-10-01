@@ -3,92 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#12324F">
+  <meta name="theme-color" content="#2E3A87">
   <title>अधिकार साथी | Adhikar Saathi</title>
-  <meta name="description" content="Hindi voice assistant that explains workers' rights and welfare schemes.">
-  <!-- Fonts are optional: if offline, the stack falls back to Nirmala UI / system Devanagari fonts. -->
+  <meta name="description" content="Voice assistant that explains workers' rights and welfare schemes in Indian languages, with the law cited.">
+  <!-- Fonts are optional: offline, the stacks fall back to Nirmala UI / system Indic fonts. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Hind:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Gurmukhi:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-  <a class="skip" href="#main" id="skip-link"></a>
+  <a class="skip" href="#main" data-s="skip"></a>
 
   <header class="top no-print">
-    <div class="top-inner">
+    <div class="top-row">
       <div class="brand">
-        <span class="brand-hi" id="brand-hi"></span>
-        <span class="brand-en" id="brand-en"></span>
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="13.5" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11.5 16.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="brand-name" data-s="brand"></span>
       </div>
-      <a class="helpline" href="tel:14434" id="helpline">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-        <span class="helpline-text"><strong>14434</strong><small data-s="helpline.sub"></small></span>
-      </a>
+      <div class="top-actions">
+        <button type="button" class="ui-lang" id="ui-lang"></button>
+        <a class="helpline" href="tel:14434" data-s-aria="helpline.aria">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+          <span>14434</span>
+        </a>
+      </div>
     </div>
-    <div class="hazard" aria-hidden="true"></div>
+    <nav class="tabs" id="tabs" aria-label="Main"></nav>
   </header>
 
   <main id="main" tabindex="-1">
-
-    <!-- ASK -->
-    <section id="view-ask" class="view" aria-labelledby="ask-title">
-      <div id="stage" class="stage" data-state="idle">
-        <h1 id="ask-title" class="title" data-s="home.title"></h1>
-        <div class="mic-wrap">
-          <svg class="dial" id="dial" viewBox="0 0 240 240" aria-hidden="true" focusable="false"></svg>
-          <button type="button" id="mic" class="mic">
-            <svg class="ic-mic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a1 1 0 0 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 0 1 2 0 6 6 0 0 0 12 0z"/></svg>
-            <svg class="ic-stop" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>
-          </button>
-        </div>
-        <p id="mic-status" class="mic-status" role="status" aria-live="polite"></p>
-        <p id="mic-timer" class="mic-timer" aria-hidden="true"></p>
-      </div>
-
-      <form id="text-form" class="text-form no-print" autocomplete="off" novalidate>
-        <label for="text-input" class="text-label" data-s="home.orType"></label>
-        <div class="text-row">
-          <input id="text-input" name="text" type="text" enterkeyhint="send" maxlength="500" lang="hi">
-          <button type="submit" class="btn btn-primary btn-send" id="send-btn"></button>
-        </div>
-        <label class="check" for="want-audio">
-          <input type="checkbox" id="want-audio" checked>
-          <span data-s="home.voiceReply"></span>
-        </label>
-      </form>
-
-      <div id="result" class="result" aria-live="polite"></div>
+    <section id="view-ask" class="view">
+      <h1 class="sr-only" data-s="home.title"></h1>
+      <div id="thread" class="thread"></div>
     </section>
 
-    <!-- SCHEMES -->
-    <section id="view-schemes" class="view" aria-labelledby="sch-title" hidden>
-      <h1 id="sch-title" class="title" data-s="sch.title"></h1>
+    <section id="view-schemes" class="view" hidden>
+      <h1 class="view-title" data-s="sch.title"></h1>
       <div id="sch-body"></div>
     </section>
 
-    <!-- COMPLAINT -->
-    <section id="view-complaint" class="view" aria-labelledby="cmp-title" hidden>
-      <h1 id="cmp-title" class="title no-print" data-s="cmp.title"></h1>
+    <section id="view-complaint" class="view" hidden>
+      <h1 class="view-title no-print" data-s="cmp.title"></h1>
       <div id="cmp-form-wrap" class="no-print">
         <p class="lead" data-s="cmp.intro"></p>
         <form id="cmp-form" class="form" novalidate></form>
       </div>
       <div id="cmp-result" aria-live="polite"></div>
     </section>
-
-    <footer class="notices no-print" id="notices">
-      <p class="notice" id="notice-legal"></p>
-      <p class="notice" id="notice-privacy"></p>
-      <button type="button" class="judge-toggle" id="judge-toggle" role="switch" aria-checked="false">
-        <span class="switch" aria-hidden="true"></span>
-        <span id="judge-label"></span>
-      </button>
-    </footer>
   </main>
 
-  <nav class="tabs no-print" id="tabs" aria-label="Main"></nav>
+  <footer class="composer no-print" id="composer" data-state="idle" data-mode="mic">
+    <div class="composer-inner">
+      <div class="composer-meta">
+        <label class="pick">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8 8 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.08 16zm2.95-8H5.08a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.03 8zM12 19.96A14 14 0 0 1 10.09 16h3.82A14 14 0 0 1 12 19.96zM14.34 14H9.66a14.6 14.6 0 0 1 0-4h4.68a14.6 14.6 0 0 1 0 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8 8 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4z"/></svg>
+          <span class="sr-only" data-s="lang.label"></span>
+          <select id="lang-select"></select>
+        </label>
+        <label class="pick voice">
+          <input type="checkbox" id="want-audio" checked>
+          <span class="switch" aria-hidden="true"></span>
+          <span data-s="home.voiceReply"></span>
+        </label>
+      </div>
 
-  <script src="app.js"></script>
+      <form id="text-form" class="input-row" autocomplete="off" novalidate>
+        <div class="rec-bar" id="rec-bar" role="status" aria-live="polite">
+          <span class="rec-dot" aria-hidden="true"></span>
+          <span class="rec-msg" data-s="rec.recording"></span>
+          <span class="rec-time" id="rec-time"></span>
+        </div>
+        <label for="text-input" class="sr-only" data-s="home.orType"></label>
+        <input id="text-input" name="text" type="text" enterkeyhint="send" maxlength="500" data-s-ph="home.placeholder">
+        <button type="button" id="mic" class="mic">
+          <svg class="ring" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="29.5" pathLength="100"/></svg>
+          <svg class="ic ic-mic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a1 1 0 0 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 0 1 2 0 6 6 0 0 0 12 0z"/></svg>
+          <svg class="ic ic-stop" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></svg>
+          <svg class="ic ic-send" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12.6 2-12.6 2z"/></svg>
+        </button>
+      </form>
+      <p class="fine" data-s="notice.legal"></p>
+    </div>
+  </footer>
+
+  <script src="app.js?v=3"></script>
 </body>
 </html>

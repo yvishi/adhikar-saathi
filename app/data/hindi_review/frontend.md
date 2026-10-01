@@ -145,3 +145,16 @@ All Hindi is unreviewed; simple wording was chosen on purpose. Please check spel
 ## HTML
 
 - `index.html` page title: `अधिकार साथी | Adhikar Saathi`
+
+## Added in the UI redesign (2026-10-01): please review
+| Where used | Hindi |
+|---|---|
+| Welcome title | नमस्ते! मैं अधिकार साथी हूँ। |
+| Welcome line | मज़दूरी, सरकारी योजनाओं या काम पर अपने हक़ के बारे में पूछिए। |
+| Above example questions | ऐसे पूछ सकते हैं |
+| Example question 1 | ठेकेदार ने मज़दूरी नहीं दी, मैं क्या करूँ? |
+| Example question 2 | ई-श्रम कार्ड क्या है? |
+| Example question 3 | ओवरटाइम का पैसा कितना मिलता है? |
+| Input placeholder (changed) | लिखिए या माइक दबाइए |
+| Recording hint (changed: "माइक" -> "बटन") | बोलिए… पूरा होने पर बटन फिर दबाइए |
+| Thinking (shortened) | सोच रहा हूँ… |

@@ -47,6 +47,7 @@ def ask(
     want_audio: str = Form("true"),
     provider: str | None = Form(None),
     retrieval: str | None = Form(None),
+    language: str | None = Form(None),
 ):
     audio_tuple = None
     if audio is not None and audio.filename is not None:
@@ -62,6 +63,7 @@ def ask(
         want_audio=want_audio.strip().lower() not in ("false", "0", "no", "off"),
         provider=provider or None,
         retrieval=retrieval or None,
+        language=(language or "").strip() or None,
     )
 
 
@@ -99,6 +101,14 @@ def complaint_draft(payload: dict = Body(default_factory=dict)):
     return draft(payload)
 
 
+class _FreshStaticFiles(StaticFiles):
+    # Browsers otherwise reuse stale app.js/style.css next to a newer index.html and the page breaks.
+    async def get_response(self, path, scope):
+        resp = await super().get_response(path, scope)
+        resp.headers["Cache-Control"] = "no-cache"
+        return resp
+
+
 # Registered last so it never shadows /api. The frontend is only mounted if it exists at startup.
 if (config.FRONTEND_DIR / "index.html").exists():
-    app.mount("/", StaticFiles(directory=str(config.FRONTEND_DIR), html=True), name="frontend")
+    app.mount("/", _FreshStaticFiles(directory=str(config.FRONTEND_DIR), html=True), name="frontend")

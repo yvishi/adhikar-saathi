@@ -104,3 +104,69 @@ def test_pipeline_error_becomes_http(monkeypatch):
     monkeypatch.setattr(pipeline, "ask", boom)
     r = client.post("/api/ask", data={"text": "x"})
     assert r.status_code == 429 and r.json()["error"]["code"] == "rate_limited"
+
+
+# ---- /api/ask `language` form field (was silently dropped before; the dropdown was a no-op)
+def test_ask_language_field_reaches_pipeline(mock, monkeypatch):
+    seen = {}
+    real = pipeline.ask
+
+    def spy(**kw):
+        seen.update(kw)
+        return real(**kw)
+    monkeypatch.setattr(pipeline, "ask", spy)
+    for code in ("pa-IN", "bn-IN", "mr-IN"):
+        r = client.post("/api/ask", data={"text": "minimum wage", "want_audio": "false", "language": code})
+        assert r.status_code == 200 and seen["language"] == code
+        assert r.json()["language"] == code
+    client.post("/api/ask", data={"text": "minimum wage", "want_audio": "false"})
+    assert seen["language"] is None
+    client.post("/api/ask", data={"text": "minimum wage", "want_audio": "false", "language": "  "})
+    assert seen["language"] is None
+
+
+def test_ask_language_omitted_keeps_hindi_shape(mock):
+    j = client.post("/api/ask", data={"text": "minimum wage", "want_audio": "false"}).json()
+    assert set(j) == ASK_KEYS
+
+
+def test_ask_unknown_language_is_400(mock):
+    r = client.post("/api/ask", data={"text": "minimum wage", "language": "xx-YY"})
+    assert r.status_code == 400 and r.json()["error"]["code"] == "bad_request"
+
+
+def test_ask_language_end_to_end_over_http(monkeypatch):
+    """Non-mock path over HTTP with faked network: translate for retrieval, prompt names the
+    language, TTS is asked for that language, response carries language + disclaimers."""
+    import json as _json
+
+    import requests
+
+    from app.backend import llm, prompts
+    from .conftest import FakeResp
+    sink = []
+
+    def post(url, **kw):
+        sink.append((url, kw))
+        if url.endswith("/translate"):
+            return FakeResp(200, {"translated_text": "minimum wage", "source_language_code": "bn-IN"})
+        if url.endswith("/text-to-speech"):
+            return FakeResp(200, {"audios": ["AAAA"]})
+        raise AssertionError(f"unexpected POST {url}")
+    monkeypatch.setattr(requests, "post", post)
+    msgs_seen = []
+
+    def complete(messages, provider=None, max_tokens=500, temperature=0.2):
+        msgs_seen.append(messages)
+        return {"text": _json.dumps({"type": "answer", "answer_hi": "ন্যূনতম মজুরি আপনার অধিকার।",
+                                     "answer_en": "Minimum wage is your right.", "used_ids": ["W-01"]},
+                                    ensure_ascii=False),
+                "usage": {"prompt_tokens": 10, "completion_tokens": 10}, "provider": "sarvam"}
+    monkeypatch.setattr(llm, "complete", complete)
+    j = client.post("/api/ask", data={"text": "আমার ন্যূনতম মজুরি", "retrieval": "all", "language": "bn-IN"}).json()
+    assert j["language"] == "bn-IN" and j["answer_hi"].startswith("ন্যূনতম")
+    assert "Bengali" in j["disclaimer_en"] and j["disclaimer_hi"] == prompts.LANG_DISCLAIMER_HI
+    assert "Bengali" in msgs_seen[0][0]["content"]
+    tts = [kw["json"] for url, kw in sink if url.endswith("/text-to-speech")]
+    assert tts and tts[0]["language_code"] == "bn-IN"
+    assert any(url.endswith("/translate") for url, _ in sink)

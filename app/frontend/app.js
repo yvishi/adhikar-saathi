@@ -1,38 +1,39 @@
 /* Adhikar Saathi frontend. Vanilla JS, no build step.
    API contract: app/CONTRACT.md section 8. Add ?mock=1 to run with no backend.
-   Extra dev params (mock only): &state=recording|thinking|answer|clarify|refuse|error|schemes|complaint  &err=<error code> */
+   Dev params (mock only): &state=recording|thinking|answer|clarify|refuse|error|schemes|schemes-q|complaint-form|complaint  &err=<code>  &judge=1  &ui=en */
 (function () {
   'use strict';
 
   /* ================================================================
-     1. STRINGS: every UI string, Hindi (primary) + English (subtitle).
-     Edit here. Use {name} for placeholders.
+     1. STRINGS. The UI shows ONE language at a time (Hindi by default,
+     English via the header switch). Edit here; {name} = placeholder.
      ================================================================ */
   // <STRINGS>
   const STRINGS = {
     hi: {
       'skip': 'मुख्य भाग पर जाएँ',
       'brand': 'अधिकार साथी',
-      'helpline.sub': 'हेल्पलाइन',
       'helpline.aria': 'हेल्पलाइन 14434 पर फ़ोन करें',
       'nav.ask': 'पूछें',
       'nav.schemes': 'योजनाएँ',
       'nav.complaint': 'शिकायत',
       'home.title': 'अपना सवाल पूछिए',
-      'home.tapStart': 'बोलने के लिए माइक दबाइए',
       'home.orType': 'या यहाँ लिखकर पूछिए',
-      'home.placeholder': 'जैसे: मज़दूरी नहीं मिली',
+      'home.placeholder': 'लिखिए या माइक दबाइए',
       'home.send': 'भेजिए',
       'home.voiceReply': 'जवाब आवाज़ में सुनाइए',
       'lang.label': 'जवाब की भाषा',
+      'welcome.title': 'नमस्ते! मैं अधिकार साथी हूँ।',
+      'welcome.body': 'मज़दूरी, सरकारी योजनाओं या काम पर अपने हक़ के बारे में पूछिए।',
+      'welcome.try': 'ऐसे पूछ सकते हैं',
+      'ex.1': 'ठेकेदार ने मज़दूरी नहीं दी, मैं क्या करूँ?',
+      'ex.2': 'ई-श्रम कार्ड क्या है?',
+      'ex.3': 'ओवरटाइम का पैसा कितना मिलता है?',
       'rec.requesting': 'माइक की अनुमति दीजिए…',
-      'rec.recording': 'बोलिए… पूरा होने पर माइक फिर दबाइए',
+      'rec.recording': 'बोलिए… पूरा होने पर बटन फिर दबाइए',
       'rec.startA11y': 'बोलना शुरू कीजिए',
       'rec.stopA11y': 'रिकॉर्डिंग रोकिए',
-      'rec.left': 'सेकंड बाकी',
-      'rec.thinking': 'सोच रहा हूँ… थोड़ा रुकिए',
-      'ans.youSaid': 'आपने कहा',
-      'ans.answer': 'जवाब',
+      'rec.thinking': 'सोच रहा हूँ…',
       'ans.clarifyLabel': 'मुझे एक बात पूछनी है',
       'ans.clarifyNext': 'जवाब देने के लिए माइक दबाइए',
       'ans.refuseLabel': 'इसका जवाब मेरे पास नहीं है',
@@ -42,10 +43,8 @@
       'ans.replay': 'फिर से सुनिए',
       'ans.tapToListen': 'सुनने के लिए बटन दबाइए',
       'ans.sources': 'जानकारी कहाँ से है',
-      'ans.openSource': 'स्रोत खोलिए',
       'ans.showEn': 'अंग्रेज़ी में देखिए',
       'ans.hideEn': 'अंग्रेज़ी छिपाइए',
-      'ans.newQuestion': 'नया सवाल पूछिए',
       'judge.label': 'Judge view',
       'err.title': 'कुछ गड़बड़ हुई',
       'err.retry': 'फिर से कोशिश कीजिए',
@@ -59,7 +58,6 @@
       'err.noSpeech': 'आवाज़ सुनाई नहीं दी। माइक के पास बोलिए और फिर कोशिश कीजिए।',
       'err.tooLong': 'रिकॉर्डिंग बहुत लंबी थी। 30 सेकंड से छोटा सवाल पूछिए।',
       'err.generic': 'कुछ गड़बड़ हो गई। फिर से कोशिश कीजिए।',
-      'err.emptyText': 'पहले अपना सवाल लिखिए।',
       'notice.legal': 'यह जानकारी है, कानूनी सलाह नहीं।',
       'notice.privacy': 'आपका सवाल Sarvam AI से प्रोसेस होता है। अपना नाम, आधार या फ़ोन नंबर न बोलिए।',
       'sch.title': 'अपनी योजनाएँ जाँचिए',
@@ -126,39 +124,38 @@
     en: {
       'skip': 'Skip to main content',
       'brand': 'Adhikar Saathi',
-      'helpline.sub': 'Helpline',
       'helpline.aria': 'Call helpline 14434',
       'nav.ask': 'Ask',
       'nav.schemes': 'Schemes',
       'nav.complaint': 'Complaint',
       'home.title': 'Ask your question',
-      'home.tapStart': 'Tap the mic to speak',
       'home.orType': 'Or type your question',
-      'home.placeholder': 'e.g. my wages are not paid',
+      'home.placeholder': 'Type, or tap the mic',
       'home.send': 'Send',
       'home.voiceReply': 'Speak the answer aloud',
       'lang.label': 'Answer language',
+      'welcome.title': 'Hello! I am Adhikar Saathi.',
+      'welcome.body': 'Ask about wages, government schemes or your rights at work.',
+      'welcome.try': 'You can ask',
+      'ex.1': 'My contractor did not pay my wages. What do I do?',
+      'ex.2': 'What is the e-Shram card?',
+      'ex.3': 'How much is overtime pay?',
       'rec.requesting': 'Please allow the microphone…',
-      'rec.recording': 'Speak now. Tap the mic again when done.',
+      'rec.recording': 'Speak now. Tap the button again when done.',
       'rec.startA11y': 'Start speaking',
       'rec.stopA11y': 'Stop recording',
-      'rec.left': 'seconds left',
-      'rec.thinking': 'Thinking… please wait',
-      'ans.youSaid': 'You said',
-      'ans.answer': 'Answer',
+      'rec.thinking': 'Thinking…',
       'ans.clarifyLabel': 'I need to ask one thing',
       'ans.clarifyNext': 'Tap the mic to reply',
       'ans.refuseLabel': 'I do not have an answer for this',
       'ans.refuseHelp': '14434 is the e-Shram helpdesk only.',
-      'ans.play': 'Play',
+      'ans.play': 'Listen',
       'ans.pause': 'Pause',
-      'ans.replay': 'Play again',
+      'ans.replay': 'Listen again',
       'ans.tapToListen': 'Tap the button to listen',
       'ans.sources': 'Where this comes from',
-      'ans.openSource': 'Open source',
-      'ans.showEn': 'English (for verification)',
+      'ans.showEn': 'Show in English',
       'ans.hideEn': 'Hide English',
-      'ans.newQuestion': 'Ask a new question',
       'judge.label': 'Judge view',
       'err.title': 'Something went wrong',
       'err.retry': 'Try again',
@@ -172,7 +169,6 @@
       'err.noSpeech': 'No speech was heard. Speak close to the microphone and try again.',
       'err.tooLong': 'The recording was too long. Ask a question shorter than 30 seconds.',
       'err.generic': 'Something went wrong. Please try again.',
-      'err.emptyText': 'Please write your question first.',
       'notice.legal': 'This is information, not legal advice.',
       'notice.privacy': 'Your question is processed by Sarvam AI. Do not say your name, Aadhaar or phone number.',
       'sch.title': 'Check my schemes',
@@ -239,32 +235,33 @@
   };
   // </STRINGS>
 
-  /* ================================================================
-     1b. Answer languages. Hindi is the only one the owner has reviewed
-     (app/data/hindi_review/); the rest are a genuine but unverified capability
-     (see app/data/language_review/INDEX.md). Mirrors app/backend/languages.py.
-     ================================================================ */
+  /* Answer languages. Only Hindi is owner-reviewed; the rest show a disclaimer
+     (driven by the server's own `language` field). Mirrors app/backend/languages.py. */
   const LANGUAGES = [
-    { code: 'hi-IN', native: 'हिन्दी', en: 'Hindi' },
-    { code: 'pa-IN', native: 'ਪੰਜਾਬੀ', en: 'Punjabi' },
-    { code: 'bn-IN', native: 'বাংলা', en: 'Bengali' },
-    { code: 'mr-IN', native: 'मराठी', en: 'Marathi' }
+    { code: 'hi-IN', native: 'हिन्दी' },
+    { code: 'pa-IN', native: 'ਪੰਜਾਬੀ' },
+    { code: 'bn-IN', native: 'বাংলা' },
+    { code: 'mr-IN', native: 'मराठी' }
   ];
   const DEFAULT_LANGUAGE = 'hi-IN';
 
   /* ================================================================
-     2. Small helpers
+     2. Helpers
      ================================================================ */
   const $ = (s, r) => (r || document).querySelector(s);
-  const isMock = new URLSearchParams(location.search).get('mock') === '1';
   const params = new URLSearchParams(location.search);
+  const isMock = params.get('mock') === '1';
   const reduceMotion = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
+  };
+  let uiLang = params.get('ui') === 'en' || store.get('as_ui') === 'en' ? 'en' : 'hi';
 
-  function tr(key, vars) {
-    const fill = (s) => (vars ? s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : s);
-    const hi = STRINGS.hi[key], en = STRINGS.en[key];
-    if (hi === undefined || en === undefined) console.warn('Missing string', key);
-    return { hi: fill(hi || key), en: fill(en || key) };
+  function t(key, vars) {
+    let s = STRINGS[uiLang][key];
+    if (s === undefined) { console.warn('Missing string', key); s = STRINGS.hi[key] || key; }
+    return vars ? s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : s;
   }
   function h(tag, attrs) {
     const el = document.createElement(tag);
@@ -283,33 +280,40 @@
     if (Array.isArray(kid)) kid.forEach((k) => append(el, k));
     else el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
   }
-  // Hindi line + small English line. Text is always set via textContent (API data is never HTML).
-  function bi(key, vars, tag) {
-    const s = typeof key === 'string' ? tr(key, vars) : key;
-    return h(tag || 'span', { class: 'bi' }, h('span', { class: 'hi', lang: 'hi' }, s.hi), h('span', { class: 'en', lang: 'en' }, s.en));
+  // A translatable label: re-rendered in place when the UI language switches.
+  function L(key, tag, attrs, vars) {
+    const el = h(tag || 'span', Object.assign({ 'data-s': key, 'data-s-vars': vars ? JSON.stringify(vars) : null }, attrs || {}));
+    el.textContent = t(key, vars); el.lang = uiLang;
+    return el;
   }
-  const plain = (key, vars) => { const s = tr(key, vars); return s.hi + ' / ' + s.en; };
-  function fillStatic() {
-    document.querySelectorAll('[data-s]').forEach((el) => { el.replaceChildren(...bi(el.dataset.s).childNodes); });
+  function fillStatic(root) {
+    const r = root || document;
+    r.querySelectorAll('[data-s]').forEach((el) => {
+      const v = el.dataset.sVars ? JSON.parse(el.dataset.sVars) : null;
+      el.textContent = t(el.dataset.s, v); el.lang = uiLang;
+    });
+    r.querySelectorAll('[data-s-ph]').forEach((el) => { el.placeholder = t(el.dataset.sPh); el.lang = uiLang; });
+    r.querySelectorAll('[data-s-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.sAria)));
   }
   const ICONS = {
-    play: '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>',
-    pause: '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>',
-    replay: '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 5V2L7 6.5 12 11V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z"/></svg>',
-    mic: '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a1 1 0 0 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 0 1 2 0 6 6 0 0 0 12 0z"/></svg>',
-    check: '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>',
-    doc: '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6 2h9l5 5v15H6zm8 1.5V8h4.5zM8 12h9v2H8zm0 4h9v2H8z"/></svg>',
-    warn: '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2 1 21h22zm-1 7h2v6h-2zm0 8h2v2h-2z"/></svg>',
-    arrowDown: '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 4h2v12l5-5 1.4 1.4L12 20l-7.4-7.6L6 11l5 5z"/></svg>',
-    ext: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg>',
-    phone: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>'
+    play: '<path fill="currentColor" d="M8 5v14l11-7z"/>',
+    pause: '<path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/>',
+    replay: '<path fill="currentColor" d="M12 5V2L7 6.5 12 11V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z"/>',
+    mic: '<path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a1 1 0 0 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 0 1 2 0 6 6 0 0 0 12 0z"/>',
+    check: '<path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>',
+    doc: '<path fill="currentColor" d="M6 2h9l5 5v15H6zm8 1.5V8h4.5zM8 12h9v2H8zm0 4h9v2H8z"/>',
+    warn: '<path fill="currentColor" d="M12 2 1 21h22zm-1 7h2v6h-2zm0 8h2v2h-2z"/>',
+    phone: '<path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/>',
+    ask: '<path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm1 2v11.2L7.2 15H20V6z"/>'
   };
-  const icon = (name) => { const t = document.createElement('template'); t.innerHTML = ICONS[name]; return t.content.firstChild; };
+  function icon(name, size) {
+    const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+    if (size) { s.setAttribute('width', size); s.setAttribute('height', size); }
+    s.innerHTML = ICONS[name];
+    return s;
+  }
   const safeUrl = (u) => (typeof u === 'string' && /^https?:\/\//i.test(u) ? u : null);
-  const store = {
-    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode: ignore */ } }
-  };
   function sessionId() {
     let id = store.get('as_session');
     if (!id) {
@@ -319,13 +323,10 @@
     return id;
   }
   let currentLanguage = LANGUAGES.some((l) => l.code === store.get('as_lang')) ? store.get('as_lang') : DEFAULT_LANGUAGE;
-  function setLanguage(code) { currentLanguage = code; store.set('as_lang', code); }
-  function scrollToEl(el) {
-    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
-  }
+  const behavior = () => (reduceMotion() ? 'auto' : 'smooth');
 
   /* ================================================================
-     3. API layer (real fetch, or in-browser mock when ?mock=1)
+     3. API (real fetch, or in-browser mock with ?mock=1)
      ================================================================ */
   class ApiError extends Error {
     constructor(code, message_hi, message_en, status) { super(code); this.code = code; this.message_hi = message_hi; this.message_en = message_en; this.status = status; }
@@ -353,9 +354,6 @@
     return body;
   }
 
-  /* ================================================================
-     4. Mock API (contract-shaped canned responses, no network)
-     ================================================================ */
   // <MOCK>
   const MOCK = {
     transcriptHi: 'मेरे मालिक ने तीन महीने से मज़दूरी नहीं दी। मैं क्या करूँ?',
@@ -364,7 +362,7 @@
       answer_en: 'Paying less than the notified minimum wage is against the law. You have the right to be paid in full and on time. A claim for unpaid wages must be made within three years.',
       sources: [
         { card_id: 'W-01', title: 'Minimum wage is a legal right', source_name: 'Code on Wages, 2019', section: 's.5', url: 'https://labour.gov.in/' },
-        { card_id: 'W-03', title: 'Claim unpaid wages within 3 years', source_name: 'Code on Wages, 2019', section: 'claims section (mock)', url: 'https://labour.gov.in/' }
+        { card_id: 'W-03', title: 'Claim unpaid wages within 3 years', source_name: 'Code on Wages, 2019', section: 's.45(6)', url: 'https://labour.gov.in/' }
       ]
     },
     clarify: {
@@ -390,13 +388,13 @@
   // </MOCK>
 
   function silentWavB64() {
-    const rate = 8000, n = 2400; // 0.3 s of silence
+    const rate = 8000, n = 2400;
     const b = new Uint8Array(44 + n);
     const w = (o, s) => { for (let i = 0; i < s.length; i++) b[o + i] = s.charCodeAt(i); };
     const u32 = (o, v) => { b[o] = v & 255; b[o + 1] = (v >> 8) & 255; b[o + 2] = (v >> 16) & 255; b[o + 3] = (v >> 24) & 255; };
     const u16 = (o, v) => { b[o] = v & 255; b[o + 1] = (v >> 8) & 255; };
     w(0, 'RIFF'); u32(4, 36 + n); w(8, 'WAVE'); w(12, 'fmt '); u32(16, 16); u16(20, 1); u16(22, 1); u32(24, rate); u32(28, rate); u16(32, 1); u16(34, 8);
-    w(36, 'data'); u32(40, n); b.fill(128, 44); // 8-bit PCM silence = 128
+    w(36, 'data'); u32(40, n); b.fill(128, 44);
     let s = ''; b.forEach((v) => { s += String.fromCharCode(v); });
     return btoa(s);
   }
@@ -410,13 +408,14 @@
       const hasAudio = f.get('audio') instanceof Blob;
       const low = text.toLowerCase();
       let kind = 'answer';
-      if (/\berr(or)?\b|nospeech|ratelimit/.test(low)) throw new ApiError(/nospeech/.test(low) ? 'no_speech' : 'rate_limited', ...errMsg(/nospeech/.test(low) ? 'no_speech' : 'rate_limited'), 429);
+      if (/\berr(or)?\b|nospeech|ratelimit/.test(low)) { const c = /nospeech/.test(low) ? 'no_speech' : 'rate_limited'; throw new ApiError(c, MOCK.errors[c].message_hi, MOCK.errors[c].message_en, 429); }
       if (/clarify|pension|पेंशन/.test(low)) kind = 'clarify';
       else if (/refuse|weather|cricket|मौसम/.test(low)) kind = 'refuse';
       else if (hasAudio) kind = ['answer', 'clarify', 'refuse'][mockTurn++ % 3];
       const src = MOCK[kind];
       const wantAudio = f.get('want_audio') !== 'false';
-      return {
+      const lang = (f.get('language') || DEFAULT_LANGUAGE).toString();
+      const out = {
         session_id: f.get('session_id') || 'mock',
         transcript: text || MOCK.transcriptHi,
         answer_hi: src.answer_hi, answer_en: src.answer_en,
@@ -427,6 +426,8 @@
         cost_inr_est: wantAudio ? 0.81 : 0.05,
         debug: { retrieved_ids: ['W-01', 'W-03', 'S-01'], used_ids: kind === 'answer' ? ['W-01', 'W-03'] : [], provider: 'mock', rewritten_query: null }
       };
+      if (lang !== DEFAULT_LANGUAGE) Object.assign(out, { language: lang, disclaimer_en: 'This answer was translated by AI and has not been checked by a speaker of this language. The Hindi and English versions are verified.', disclaimer_hi: null });
+      return out;
     }
     if (path === '/api/schemes') return { matches: MOCK.schemes };
     if (path === '/api/complaint-draft') {
@@ -441,49 +442,37 @@
     }
     throw new ApiError('bad_request', null, null, 400);
   }
-  function errMsg(code) { const e = MOCK.errors[code]; return [e.message_hi, e.message_en]; }
 
   /* ================================================================
-     5. Tabs / views / static UI
+     4. Chrome: header switch, tabs, language picker, views
      ================================================================ */
   const VIEWS = ['ask', 'schemes', 'complaint'];
-  const TAB_ICONS = { ask: 'mic', schemes: 'check', complaint: 'doc' };
+  const TAB_ICONS = { ask: 'ask', schemes: 'check', complaint: 'doc' };
+  const composer = $('#composer'), thread = $('#thread'), input = $('#text-input'), micBtn = $('#mic');
   let currentView = 'ask';
 
   function buildChrome() {
-    document.documentElement.lang = 'hi';
-    $('#skip-link').replaceChildren(...bi('skip').childNodes);
-    $('#brand-hi').textContent = STRINGS.hi.brand;
-    $('#brand-en').textContent = STRINGS.en.brand;
-    $('#helpline').setAttribute('aria-label', plain('helpline.aria'));
-    $('#send-btn').replaceChildren(...bi('home.send').childNodes);
-    $('#text-input').placeholder = STRINGS.hi['home.placeholder'];
-    $('#text-input').setAttribute('aria-describedby', 'text-ph-en');
-    const phEn = h('span', { id: 'text-ph-en', class: 'en', hidden: true }, STRINGS.en['home.placeholder']);
-    $('#text-form').append(phEn);
-    $('#notice-legal').replaceChildren(...bi('notice.legal').childNodes);
-    $('#notice-privacy').replaceChildren(...bi('notice.privacy').childNodes);
-    $('#judge-label').textContent = plain('judge.label').split(' / ')[0];
-    buildLanguageSelector();
     const tabs = $('#tabs');
-    const inner = h('div', { class: 'tabs-inner' });
     VIEWS.forEach((v) => {
-      inner.append(h('button', { type: 'button', class: 'tab', 'data-view': v, 'aria-label': plain('nav.' + v), onclick: () => showView(v) }, icon(TAB_ICONS[v]), bi('nav.' + v)));
+      tabs.append(h('button', { type: 'button', class: 'tab', 'data-view': v, onclick: () => showView(v) }, icon(TAB_ICONS[v]), L('nav.' + v)));
     });
-    tabs.append(inner);
-    fillStatic();
+    const sel = $('#lang-select');
+    LANGUAGES.forEach((l) => sel.append(h('option', { value: l.code, selected: l.code === currentLanguage || null, lang: l.code.slice(0, 2) }, l.native)));
+    sel.addEventListener('change', () => { currentLanguage = sel.value; store.set('as_lang', sel.value); });
+    $('#ui-lang').addEventListener('click', () => setUiLang(uiLang === 'hi' ? 'en' : 'hi'));
+    // keep the thread clear of the fixed composer, whatever its height
+    const fit = () => document.documentElement.style.setProperty('--composer-h', composer.offsetHeight + 'px');
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(composer); else fit();
   }
-  // Answer-language selector: inserted next to the mic button (index.html itself is not owned
-  // by this change; see this agent's final report). Only Hindi is owner-verified; picking
-  // another language shows a disclaimer on the answer (renderAnswer below), driven by the
-  // server response's own `language` field so the UI never claims a language the backend did
-  // not actually answer in.
-  function buildLanguageSelector() {
-    const sel = h('select', { id: 'lang-select', 'aria-label': plain('lang.label'), onchange: (ev) => setLanguage(ev.target.value) },
-      LANGUAGES.map((l) => h('option', { value: l.code, selected: l.code === currentLanguage || null }, l.native + ' / ' + l.en)));
-    const wrap = h('div', { class: 'lang-select' }, h('label', { for: 'lang-select' }, bi('lang.label')), sel);
-    const micWrap = $('.mic-wrap', $('#stage'));
-    if (micWrap) micWrap.before(wrap); else $('#stage').append(wrap);
+  function setUiLang(lang) {
+    uiLang = lang; store.set('as_ui', lang);
+    document.documentElement.lang = lang;
+    const btn = $('#ui-lang');
+    btn.textContent = lang === 'hi' ? 'English' : 'हिंदी';
+    btn.lang = lang === 'hi' ? 'en' : 'hi';
+    btn.setAttribute('aria-label', lang === 'hi' ? 'Switch to English' : 'हिंदी में देखिए');
+    fillStatic();
+    setPhase(S.phase); // refresh dynamic aria labels
   }
 
   function showView(name, opts) {
@@ -491,57 +480,77 @@
     if (name !== 'ask') stopAudio();
     currentView = name;
     VIEWS.forEach((v) => { $('#view-' + v).hidden = v !== name; });
-    document.querySelectorAll('.tab').forEach((t) => { if (t.dataset.view === name) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
-    try { history.replaceState(null, '', location.pathname + location.search + '#' + name); } catch (e) { /* file:// or sandbox */ }
+    composer.hidden = name !== 'ask';
+    document.body.classList.toggle('on-ask', name === 'ask');
+    document.querySelectorAll('.tab').forEach((tb) => { if (tb.dataset.view === name) tb.setAttribute('aria-current', 'page'); else tb.removeAttribute('aria-current'); });
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + name); } catch (e) { /* file:// */ }
     if (!(opts && opts.keepScroll)) window.scrollTo(0, 0);
     if (name === 'schemes' && !schemesStarted) startSchemes();
   }
 
   /* ================================================================
-     6. ASK: recording, sending, rendering
+     5. ASK: thread, composer, recording
      ================================================================ */
-  const stage = $('#stage'), micBtn = $('#mic'), statusEl = $('#mic-status'), timerEl = $('#mic-timer'), resultEl = $('#result'), viewAsk = $('#view-ask'), dial = $('#dial');
-  const MAX_SECONDS = 30, TICKS = 30;
-  const S = { phase: 'idle', recorder: null, stream: null, chunks: [], startedAt: 0, ticker: null, autoStopped: false, lastReq: null, audio: null };
+  const MAX_SECONDS = 30;
+  const S = { phase: 'idle', recorder: null, stream: null, chunks: [], startedAt: 0, ticker: null, audio: null };
 
-  // dial: 30 ticks, one per second of the 30 s limit
-  (function buildDial() {
-    const ns = 'http://www.w3.org/2000/svg';
-    for (let i = 0; i < TICKS; i++) {
-      const l = document.createElementNS(ns, 'line');
-      l.setAttribute('x1', 120); l.setAttribute('y1', 6); l.setAttribute('x2', 120); l.setAttribute('y2', 20);
-      l.setAttribute('transform', 'rotate(' + (i * 360 / TICKS) + ' 120 120)');
-      l.style.setProperty('--i', i);
-      dial.append(l);
-    }
-  })();
-  function setTicks(elapsedSec) {
-    const gone = Math.min(TICKS, Math.floor(elapsedSec));
-    dial.childNodes.forEach((l, i) => l.classList.toggle('gone', i < gone));
+  function msg(side, cls) {
+    const m = h('div', { class: 'msg ' + side + (cls ? ' ' + cls : '') });
+    thread.append(m);
+    return m;
   }
+  function reveal(el, where) {
+    requestAnimationFrame(() => {
+      if (where === 'start') {
+        const top = el.getBoundingClientRect().top + window.scrollY - ($('.top').offsetHeight + 12);
+        window.scrollTo({ top, behavior: behavior() });
+      } else {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: behavior() });
+      }
+    });
+  }
+
+  function buildWelcome() {
+    const m = msg('them', 'welcome');
+    const chips = h('div', { class: 'chips' });
+    ['ex.1', 'ex.2', 'ex.3'].forEach((k) => {
+      chips.append(h('button', { type: 'button', class: 'chip', onclick: () => { if (S.phase === 'idle') sendAsk({ text: t(k) }); } }, icon('ask'), L(k)));
+    });
+    const judge = h('button', { type: 'button', class: 'judge-toggle', id: 'judge-toggle', role: 'switch', 'aria-checked': 'false', onclick: () => setJudge(!document.body.classList.contains('judge')) },
+      h('span', { class: 'switch', 'aria-hidden': 'true' }), L('judge.label'));
+    m.append(h('div', { class: 'bubble' },
+      L('welcome.title', 'p', { class: 'welcome-title' }),
+      L('welcome.body', 'p', { class: 'welcome-body' }),
+      L('welcome.try', 'span', { class: 'eyebrow' }),
+      chips,
+      h('div', { class: 'welcome-foot' }, L('notice.privacy', 'p'), judge)));
+  }
+
+  function setMode() {
+    composer.dataset.mode = input.value.trim() ? 'send' : 'mic';
+    micBtn.setAttribute('aria-label', S.phase === 'recording' ? t('rec.stopA11y') : composer.dataset.mode === 'send' ? t('home.send') : t('rec.startA11y'));
+  }
+  input.addEventListener('input', setMode);
 
   function setPhase(phase) {
     S.phase = phase;
-    stage.dataset.state = phase;
+    composer.dataset.state = phase;
     const busy = phase === 'requesting' || phase === 'thinking';
     micBtn.setAttribute('aria-busy', busy ? 'true' : 'false');
-    micBtn.setAttribute('aria-label', phase === 'recording' ? plain('rec.stopA11y') : plain('rec.startA11y'));
-    dial.classList.toggle('sweep', phase === 'thinking' && !reduceMotion());
-    $('#send-btn').disabled = busy || phase === 'recording';
-    const msg = { requesting: 'rec.requesting', recording: 'rec.recording', thinking: 'rec.thinking' }[phase] || (viewAsk.dataset.result ? 'ans.newQuestion' : 'home.tapStart');
-    statusEl.replaceChildren(msg ? bi(msg) : '');
-    if (phase !== 'recording') { timerEl.textContent = ''; setTicks(0); }
+    input.disabled = busy;
+    if (phase !== 'recording') { $('#rec-time').textContent = ''; setRing(0); }
+    setMode();
   }
-  function setResultMode(mode) {
-    if (mode) viewAsk.dataset.result = mode; else delete viewAsk.dataset.result;
-    viewAsk.classList.toggle('has-result', !!mode);
+  function setRing(frac) {
+    $('.ring circle', micBtn).style.strokeDashoffset = String(100 - Math.min(1, frac) * 100);
   }
   function stopAudio() { if (S.audio) { try { S.audio.pause(); } catch (e) { /* ignore */ } S.audio = null; } }
 
   function pickMime() {
     if (typeof MediaRecorder === 'undefined' || !MediaRecorder.isTypeSupported) return '';
-    const c = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'];
-    for (const m of c) { try { if (MediaRecorder.isTypeSupported(m)) return m; } catch (e) { /* next */ } }
+    for (const m of ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus']) {
+      try { if (MediaRecorder.isTypeSupported(m)) return m; } catch (e) { /* next */ }
+    }
     return '';
   }
   function extFor(type) {
@@ -554,35 +563,46 @@
 
   micBtn.addEventListener('click', () => {
     if (S.phase === 'recording') stopRecording();
-    else if (S.phase === 'idle') startRecording();
+    else if (S.phase === 'idle') {
+      if (input.value.trim()) submitText();
+      else startRecording();
+    }
   });
+  $('#text-form').addEventListener('submit', (ev) => { ev.preventDefault(); submitText(); });
+  function submitText() {
+    if (S.phase !== 'idle') return;
+    const v = input.value.trim();
+    if (!v) { input.focus(); return; }
+    input.value = ''; setMode();
+    sendAsk({ text: v });
+  }
 
   async function startRecording() {
     stopAudio();
     setPhase('requesting');
     if (isMock && !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) return fakeRecording();
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') {
-      return showLocalError('unsupported', 'err.unsupported', 'type');
+      return showLocalError('err.unsupported', 'type');
     }
     let stream;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
     } catch (e) {
       const denied = e && (e.name === 'NotAllowedError' || e.name === 'SecurityError' || e.name === 'PermissionDeniedError');
-      return showLocalError(denied ? 'mic_denied' : 'no_mic', denied ? 'err.micDenied' : 'err.noMic', denied ? 'record' : 'type');
+      return showLocalError(denied ? 'err.micDenied' : 'err.noMic', denied ? 'record' : 'type');
     }
     const mime = pickMime();
     let rec;
     try { rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream); }
-    catch (e) { stream.getTracks().forEach((t) => t.stop()); return showLocalError('unsupported', 'err.unsupported', 'type'); }
-    S.stream = stream; S.recorder = rec; S.chunks = []; S.autoStopped = false;
+    catch (e) { stream.getTracks().forEach((tr) => tr.stop()); return showLocalError('err.unsupported', 'type'); }
+    S.stream = stream; S.recorder = rec; S.chunks = [];
     rec.ondataavailable = (ev) => { if (ev.data && ev.data.size) S.chunks.push(ev.data); };
     rec.onstop = onRecorderStop;
     rec.start();
     beginTicker();
   }
   function fakeRecording() { // mock mode on a device without a microphone
-    S.recorder = { state: 'recording', stop() { this.state = 'inactive'; setTimeout(() => finishRecording(new Blob([new Uint8Array(3000)], { type: 'audio/webm' }), Date.now() - S.startedAt), 0); } };
+    S.recorder = { state: 'recording', stop() { this.state = 'inactive'; setTimeout(() => finishRecording(new Blob([new Uint8Array(3000)], { type: 'audio/webm' }), performance.now() - S.startedAt), 0); } };
     beginTicker();
   }
   function beginTicker() {
@@ -590,10 +610,9 @@
     setPhase('recording');
     const tick = () => {
       const el = (performance.now() - S.startedAt) / 1000;
-      setTicks(el);
-      const left = Math.max(0, Math.ceil(MAX_SECONDS - el));
-      timerEl.textContent = left + ' ' + STRINGS.hi['rec.left'] + ' · ' + STRINGS.en['rec.left'];
-      if (el >= MAX_SECONDS) { S.autoStopped = true; stopRecording(); }
+      setRing(el / MAX_SECONDS);
+      $('#rec-time').textContent = '0:' + String(Math.min(MAX_SECONDS, Math.floor(el))).padStart(2, '0') + ' / 0:30';
+      if (el >= MAX_SECONDS) stopRecording();
     };
     tick();
     S.ticker = setInterval(tick, 100);
@@ -603,7 +622,7 @@
     const r = S.recorder;
     if (r && r.state !== 'inactive') { try { r.stop(); } catch (e) { releaseStream(); } }
   }
-  function releaseStream() { if (S.stream) { S.stream.getTracks().forEach((t) => t.stop()); S.stream = null; } }
+  function releaseStream() { if (S.stream) { S.stream.getTracks().forEach((tr) => tr.stop()); S.stream = null; } }
   function onRecorderStop() {
     const dur = performance.now() - S.startedAt;
     const type = (S.recorder && S.recorder.mimeType) || (S.chunks[0] && S.chunks[0].type) || 'audio/webm';
@@ -611,19 +630,10 @@
     finishRecording(new Blob(S.chunks, { type }), dur);
   }
   function finishRecording(blob, durMs) {
-    if (durMs < 700 || blob.size < 500) return showLocalError('too_short', 'err.tooShort', 'record');
+    if (durMs < 700 || blob.size < 500) return showLocalError('err.tooShort', 'record');
     sendAsk({ audio: blob });
   }
   document.addEventListener('visibilitychange', () => { if (document.hidden && S.phase === 'recording') stopRecording(); });
-
-  $('#text-form').addEventListener('submit', (ev) => {
-    ev.preventDefault();
-    if (S.phase !== 'idle') return;
-    const v = $('#text-input').value.trim();
-    if (!v) { showLocalError('empty', 'err.emptyText', 'type'); return; }
-    $('#text-input').value = '';
-    sendAsk({ text: v });
-  });
 
   function buildAskForm(req) {
     const f = new FormData();
@@ -634,29 +644,55 @@
     f.append('language', currentLanguage);
     return f;
   }
-  async function sendAsk(req) {
-    S.lastReq = req;
+
+  function addUser(text) {
+    const m = msg('me');
+    const b = text
+      ? h('div', { class: 'bubble' }, h('p', null, text))
+      : h('div', { class: 'bubble pending' }, icon('mic'), h('span', { 'aria-hidden': 'true' }, '…'));
+    m.append(b);
+    reveal(m, 'end');
+    return m;
+  }
+  function addThinking() {
+    const m = msg('them', 'thinking');
+    m.append(h('div', { class: 'bubble', role: 'status' }, h('span', { class: 'dots', 'aria-hidden': 'true' }, h('i'), h('i'), h('i')), L('rec.thinking', 'span', { class: 'dots-label' })));
+    reveal(m, 'end');
+    return m;
+  }
+
+  async function sendAsk(req, opts) {
+    if (currentView !== 'ask') showView('ask');
+    stopAudio();
+    composer.classList.remove('nudge');
+    const userMsg = opts && opts.retry ? null : addUser(req.text || null);
     setPhase('thinking');
+    const thinking = addThinking();
     try {
       const data = await callApi('/api/ask', { form: buildAskForm(req) });
+      thinking.remove();
+      if (userMsg && req.audio) {
+        if (data.transcript) userMsg.replaceChildren(h('div', { class: 'bubble' }, h('p', null, data.transcript)));
+        else userMsg.remove();
+      }
       setPhase('idle');
       renderAnswer(data);
     } catch (e) {
+      thinking.remove();
+      if (userMsg && req.audio) userMsg.remove();
       setPhase('idle');
       showApiError(e, req);
     }
   }
 
-  function showLocalError(code, key, action) {
+  function showLocalError(key, action) {
     setPhase('idle');
-    const s = tr(key);
-    renderError({ code, message_hi: s.hi, message_en: s.en }, action);
+    renderError({ message_hi: STRINGS.hi[key], message_en: STRINGS.en[key] }, action);
   }
   function showApiError(e, req) {
     const code = e.code || 'unknown';
-    const fallbackKey = { network: 'err.noNetwork', rate_limited: 'err.rateLimited', no_speech: 'err.noSpeech', audio_too_long: 'err.tooLong' }[code] || 'err.generic';
-    const fb = tr(fallbackKey);
-    const err = { code, message_hi: e.message_hi || fb.hi, message_en: e.message_en || fb.en };
+    const fb = { network: 'err.noNetwork', rate_limited: 'err.rateLimited', no_speech: 'err.noSpeech', audio_too_long: 'err.tooLong' }[code] || 'err.generic';
+    const err = { message_hi: e.message_hi || STRINGS.hi[fb], message_en: e.message_en || STRINGS.en[fb] };
     let action = 'resend';
     if (code === 'no_speech' || code === 'audio_too_long') action = 'record';
     else if (code === 'bad_request') action = 'type';
@@ -665,125 +701,93 @@
   }
   function renderError(err, action, req) {
     stopAudio();
-    setResultMode('error');
     const retry = () => {
-      if (action === 'resend' && req) sendAsk(req);
+      if (action === 'resend' && req) sendAsk(req, { retry: true });
       else if (action === 'record') startRecording();
-      else { const i = $('#text-input'); i.focus(); scrollToEl($('#text-form')); }
+      else input.focus();
     };
-    const retryKey = action === 'type' ? 'err.typeInstead' : 'err.retry';
-    resultEl.replaceChildren(
-      h('section', { class: 'card err-card', role: 'alert' },
-        h('div', { class: 'err-title' }, bi('err.title')),
-        h('p', { class: 'err-msg', lang: 'hi' }, err.message_hi),
-        h('p', { class: 'err-msg-en', lang: 'en' }, err.message_en),
-        h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: retry }, bi(retryKey))
-      )
-    );
-    setPhase('idle');
-    scrollToEl(resultEl);
+    const m = msg('them');
+    m.append(h('div', { class: 'bubble error', role: 'alert' },
+      L('err.title', 'span', { class: 'tag error' }),
+      h('p', { lang: uiLang }, uiLang === 'en' ? err.message_en : err.message_hi),
+      h('button', { type: 'button', class: 'btn retry', onclick: retry }, L(action === 'type' ? 'err.typeInstead' : 'err.retry'))));
+    reveal(m, 'end');
   }
 
   function renderAnswer(d) {
     stopAudio();
     const type = ['answer', 'clarify', 'refuse'].includes(d.type) ? d.type : 'answer';
-    setResultMode(type);
-    setPhase('idle');
-    const kids = [];
-    // Only shown when the SERVER says it actually answered in another language (d.language),
-    // never just because that language is selected in the UI: keeps the label honest even
-    // before/without full backend wiring for this parameter (see final report).
-    if (d.language && d.language !== 'hi-IN' && (d.disclaimer_en || d.disclaimer_hi)) {
-      kids.push(h('section', { class: 'card lang-disclaimer', role: 'note' }, icon('warn'),
-        h('div', null,
-          d.disclaimer_en ? h('p', { class: 'lang-disclaimer-en', lang: 'en' }, d.disclaimer_en) : null,
-          d.disclaimer_hi ? h('p', { class: 'lang-disclaimer-hi', lang: 'hi' }, d.disclaimer_hi) : null)));
-    }
-    if (d.transcript) {
-      kids.push(h('section', { class: 'card transcript' }, h('h2', null, bi('ans.youSaid')), h('p', { lang: 'hi' }, d.transcript)));
-    }
-    // player
-    const playBtn = h('button', { type: 'button', class: 'btn btn-hat play-btn', 'aria-label': plain('ans.play') });
-    const playHint = h('span', { class: 'play-hint', hidden: true }, STRINGS.hi['ans.tapToListen'] + ' / ' + STRINGS.en['ans.tapToListen']);
-    const setPlayUi = (mode) => { // 'play' | 'pause' | 'replay'
-      const k = { play: 'ans.play', pause: 'ans.pause', replay: 'ans.replay' }[mode];
-      playBtn.replaceChildren(icon(mode), h('span', { class: 'lbl' }, bi(k)));
-      playBtn.setAttribute('aria-label', plain(k));
-    };
-    let playRow = null;
+    const ansLang = (d.language || DEFAULT_LANGUAGE).slice(0, 2);
+    const m = msg('them');
+    const b = h('div', { class: 'bubble ' + type });
+    if (type !== 'answer') b.append(L(type === 'clarify' ? 'ans.clarifyLabel' : 'ans.refuseLabel', 'span', { class: 'tag ' + type }));
+    b.append(h('p', { class: 'answer-text', lang: ansLang }, d.answer_hi || ''));
+
     if (d.audio_b64) {
       const audio = new Audio('data:' + (d.audio_mime || 'audio/wav') + ';base64,' + d.audio_b64);
       S.audio = audio;
-      setPlayUi('play');
-      audio.addEventListener('playing', () => { setPlayUi('pause'); playHint.hidden = true; });
-      audio.addEventListener('pause', () => { if (!audio.ended) setPlayUi('play'); });
-      audio.addEventListener('ended', () => setPlayUi('replay'));
-      playBtn.addEventListener('click', () => {
+      const btn = h('button', { type: 'button', class: 'listen' });
+      const hint = L('ans.tapToListen', 'span', { class: 'listen-hint', hidden: true });
+      const setListen = (mode) => btn.replaceChildren(icon(mode), L({ play: 'ans.play', pause: 'ans.pause', replay: 'ans.replay' }[mode]));
+      setListen('play');
+      audio.addEventListener('playing', () => { setListen('pause'); hint.hidden = true; });
+      audio.addEventListener('pause', () => { if (!audio.ended) setListen('play'); });
+      audio.addEventListener('ended', () => setListen('replay'));
+      btn.addEventListener('click', () => {
         if (!audio.paused) { audio.pause(); return; }
         if (audio.ended) audio.currentTime = 0;
-        audio.play().catch(() => { playHint.hidden = false; });
+        audio.play().catch(() => { hint.hidden = false; });
       });
-      playRow = h('div', { class: 'play-row' }, playBtn, playHint);
+      b.append(h('div', null, btn, hint));
       const p = audio.play();
-      if (p && p.catch) p.catch(() => { playHint.hidden = false; }); // autoplay blocked: big button + hint
+      if (p && p.catch) p.catch(() => { hint.hidden = false; }); // autoplay blocked: show the hint
     }
 
-    // answer card
-    const card = h('section', { class: 'card answer-card ' + type });
-    const kickerKey = { answer: 'ans.answer', clarify: 'ans.clarifyLabel', refuse: 'ans.refuseLabel' }[type];
-    card.append(h('div', { class: 'kicker' }, bi(kickerKey)));
-    if (playRow) card.append(playRow);
-    card.append(h('p', { class: 'answer-hi', lang: 'hi' }, d.answer_hi || ''));
-    if (type === 'clarify') {
-      card.append(h('div', { class: 'next-cue' }, icon('arrowDown'), bi('ans.clarifyNext')));
-    }
     if (type === 'refuse') {
-      card.append(h('div', { class: 'helpline-note' }, bi('ans.refuseHelp'),
-        h('a', { class: 'btn btn-hat btn-block', href: 'tel:14434' }, h('span', { class: 'hi' }, '14434'), h('span', { class: 'en' }, STRINGS.hi['helpline.sub'] + ' / ' + STRINGS.en['helpline.sub']))));
+      b.append(h('div', { class: 'note help' }, L('ans.refuseHelp'), h('a', { class: 'call', href: 'tel:14434' }, icon('phone', 16), '14434')));
     }
-    // English verification
-    const enPanel = h('div', { class: 'en-panel', id: 'en-panel', hidden: true }, h('span', { class: 'tag' }, 'English gloss'), h('p', { lang: 'en' }, d.answer_en || ''));
-    const enBtn = h('button', { type: 'button', class: 'btn btn-block en-toggle', 'aria-expanded': 'false', 'aria-controls': 'en-panel' }, bi('ans.showEn'));
-    enBtn.addEventListener('click', () => {
-      const open = enPanel.hidden;
-      enPanel.hidden = !open;
-      enBtn.setAttribute('aria-expanded', String(open));
-      enBtn.replaceChildren(bi(open ? 'ans.hideEn' : 'ans.showEn'));
-    });
-    card.append(enBtn, enPanel);
-    kids.push(card);
 
-    // sources
     if (Array.isArray(d.sources) && d.sources.length) {
-      const list = h('ul', { class: 'sources' });
+      const stamps = h('div', { class: 'stamps' });
       d.sources.forEach((s) => {
         const url = safeUrl(s.url);
-        list.append(h('li', { class: 'source' },
-          h('span', { class: 's-title', lang: 'en' }, s.title || s.card_id || ''),
-          h('span', { class: 's-meta', lang: 'en' }, [s.source_name, s.section].filter(Boolean).join(' · ')),
-          url ? h('a', { class: 'btn s-link', href: url, target: '_blank', rel: 'noopener noreferrer' }, h('span', { class: 'lbl' }, bi('ans.openSource')), icon('ext')) : null));
+        const inner = [h('span', { class: 'stamp-law' }, s.source_name || s.title || s.card_id || ''), s.section ? h('span', { class: 'stamp-sec' }, s.section) : null];
+        stamps.append(url
+          ? h('a', { class: 'stamp', href: url, target: '_blank', rel: 'noopener noreferrer', title: s.title || '', lang: 'en' }, inner)
+          : h('span', { class: 'stamp', title: s.title || '', lang: 'en' }, inner));
       });
-      kids.push(h('section', { class: 'card' }, h('h2', null, bi('ans.sources')), list));
+      b.append(h('div', { class: 'sources' }, L('ans.sources', 'span', { class: 'eyebrow' }), stamps));
     }
 
-    // judge view
+    if (d.answer_en) {
+      const gloss = h('p', { class: 'gloss', lang: 'en', hidden: uiLang !== 'en' || null }, d.answer_en);
+      const tog = h('button', { type: 'button', class: 'linkish', 'aria-expanded': String(!gloss.hidden) });
+      const label = () => tog.replaceChildren(L(gloss.hidden ? 'ans.showEn' : 'ans.hideEn'));
+      label();
+      tog.addEventListener('click', () => { gloss.hidden = !gloss.hidden; tog.setAttribute('aria-expanded', String(!gloss.hidden)); label(); });
+      b.append(h('div', null, tog, gloss));
+    }
+    m.append(b);
+
+    if (type === 'clarify') {
+      m.append(L('ans.clarifyNext', 'p', { class: 'after' }));
+      composer.classList.add('nudge');
+    }
     if (d.latency_ms || d.cost_inr_est != null || d.debug) {
-      const box = h('div', { class: 'judge-box judge-only' }, h('b', null, 'Judge view'));
       const lines = [];
       if (d.latency_ms) lines.push('latency_ms: ' + Object.keys(d.latency_ms).map((k) => k + '=' + d.latency_ms[k]).join('  '));
       if (d.cost_inr_est != null) lines.push('cost_inr_est: Rs ' + d.cost_inr_est);
+      if (d.language) lines.push('language: ' + d.language);
       if (d.debug) lines.push('debug: ' + JSON.stringify(d.debug, null, 2));
-      box.append(h('pre', null, lines.join('\n')));
-      kids.push(box);
+      m.append(h('div', { class: 'judge-box judge-only' }, h('pre', null, lines.join('\n'))));
     }
-    resultEl.replaceChildren(...kids);
-    scrollToEl(resultEl);
+    reveal(m, 'start');
   }
 
   /* ================================================================
-     7. SCHEMES flow
+     6. SCHEMES
      ================================================================ */
-  const yn = (k) => [{ k: 'q.yes', v: true }, { k: 'q.no', v: false }, { k: 'q.unsure', v: undefined }];
+  const yn = () => [{ k: 'q.yes', v: true }, { k: 'q.no', v: false }, { k: 'q.unsure', v: undefined }];
   const QUESTIONS = [
     { id: 'age', q: 'q.age', opts: [{ k: 'q.age.u18', v: 16 }, { k: 'q.age.18_40', v: 30 }, { k: 'q.age.41_59', v: 50 }, { k: 'q.age.60', v: 62 }] },
     { id: 'monthly_income_inr', q: 'q.income', opts: [{ k: 'q.income.low', v: 6000 }, { k: 'q.income.mid', v: 12000 }, { k: 'q.income.high', v: 20000 }] },
@@ -792,88 +796,80 @@
     { id: 'is_income_tax_payer', q: 'q.tax', opts: yn() },
     { id: 'is_pregnant', q: 'q.preg', opts: [{ k: 'q.preg.yes', v: true }, { k: 'q.preg.no', v: false }] }
   ];
-  let schemesStarted = false, qIndex = 0, qAnswers = {}, qLabels = [];
+  let schemesStarted = false, qIndex = 0, qAnswers = {};
   const schBody = $('#sch-body');
 
-  function startSchemes() { schemesStarted = true; qIndex = 0; qAnswers = {}; qLabels = []; renderQuestion(); }
+  function startSchemes() { schemesStarted = true; qIndex = 0; qAnswers = {}; renderQuestion(); }
   function renderQuestion() {
     const q = QUESTIONS[qIndex];
-    const bar = h('div', { class: 'progress', 'aria-hidden': 'true' }, QUESTIONS.map((_, i) => h('i', { class: i < qIndex ? 'done' : i === qIndex ? 'now' : '' })));
     const opts = h('div', { class: 'opts', role: 'group', 'aria-labelledby': 'q-text' });
-    q.opts.forEach((o) => {
-      opts.append(h('button', { type: 'button', class: 'btn opt', 'aria-pressed': 'false', onclick: () => answerQ(q, o) }, bi(o.k)));
-    });
-    const kids = [
-      qIndex === 0 ? h('p', { class: 'lead' }, bi('sch.intro')) : null,
-      bar,
-      h('p', { class: 'q-count' }, plain('sch.progress', { n: qIndex + 1, total: QUESTIONS.length })),
-      h('h2', { class: 'q-text', id: 'q-text' }, bi(q.q)),
-      opts
-    ];
-    if (qIndex > 0) kids.push(h('div', { class: 'q-nav' }, h('button', { type: 'button', class: 'btn', onclick: () => { qIndex--; qLabels.pop(); delete qAnswers[QUESTIONS[qIndex].id]; renderQuestion(); } }, bi('sch.back'))));
-    schBody.replaceChildren(...kids.filter(Boolean));
-    const first = $('.opt', schBody); if (first && qIndex > 0) first.focus({ preventScroll: true });
+    q.opts.forEach((o) => opts.append(h('button', { type: 'button', class: 'btn opt', onclick: () => answerQ(q, o) }, L(o.k))));
+    const pct = Math.round((qIndex / QUESTIONS.length) * 100);
+    schBody.replaceChildren(
+      qIndex === 0 ? L('sch.intro', 'p', { class: 'lead' }) : h('span'),
+      h('div', { class: 'q-card' },
+        h('div', { class: 'q-head' }, L('sch.progress', 'span', null, { n: qIndex + 1, total: QUESTIONS.length }),
+          h('span', { class: 'bar', 'aria-hidden': 'true' }, h('i', { style: 'width:' + pct + '%' }))),
+        L(q.q, 'h2', { class: 'q-text', id: 'q-text', tabindex: '-1' }),
+        opts,
+        qIndex > 0 ? h('button', { type: 'button', class: 'linkish q-back', onclick: () => { qIndex--; delete qAnswers[QUESTIONS[qIndex].id]; renderQuestion(); } }, L('sch.back')) : null));
+    if (qIndex > 0) $('#q-text').focus({ preventScroll: true }); // screen readers hear the new question
   }
   function answerQ(q, o) {
-    if (o.v !== undefined) qAnswers[q.id] = o.v; // "not sure" = field omitted -> backend returns "unknown"
-    qLabels.push(o.k);
+    if (o.v !== undefined) qAnswers[q.id] = o.v; // "not sure" = omitted -> backend says "unknown"
     if (qIndex < QUESTIONS.length - 1) { qIndex++; renderQuestion(); window.scrollTo(0, 0); } else submitSchemes();
   }
   async function submitSchemes() {
-    schBody.replaceChildren(h('p', { class: 'spinner-note', role: 'status' }, bi('sch.checking')));
+    schBody.replaceChildren(L('sch.checking', 'p', { class: 'loading', role: 'status' }));
     try {
       const data = await callApi('/api/schemes', { json: qAnswers });
       renderSchemeResults(data.matches || []);
     } catch (e) {
-      const fb = tr(e.code === 'network' ? 'err.noNetwork' : 'err.generic');
-      schBody.replaceChildren(h('section', { class: 'card err-card', role: 'alert' },
-        h('div', { class: 'err-title' }, bi('err.title')),
-        h('p', { class: 'err-msg', lang: 'hi' }, e.message_hi || fb.hi), h('p', { class: 'err-msg-en', lang: 'en' }, e.message_en || fb.en),
-        h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: submitSchemes }, bi('err.retry'))));
+      const fb = e.code === 'network' ? 'err.noNetwork' : 'err.generic';
+      schBody.replaceChildren(h('div', { class: 'bubble error', role: 'alert' },
+        L('err.title', 'span', { class: 'tag error' }),
+        h('p', null, (uiLang === 'en' ? e.message_en : e.message_hi) || t(fb)),
+        h('button', { type: 'button', class: 'btn retry', onclick: submitSchemes }, L('err.retry'))));
     }
     window.scrollTo(0, 0);
   }
-  // The backend text quotes the representative numbers we send (16/30/50/62, Rs 6000/12000/20000).
-  // The user only picked a band, so show the band instead of a made-up exact value.
+  // The backend quotes the representative numbers we send; show the band the user picked instead.
   const AGE_BAND = { 16: '16-17', 30: '18-40', 50: '41-59', 62: '60 or above' };
   const INC_BAND = { 6000: 'up to Rs 8000', 12000: 'Rs 8001-15000', 20000: 'above Rs 15000' };
-  function bandify(t) {
-    return (t || '')
+  function bandify(s) {
+    return (s || '')
       .replace(/\bage (16|30|50|62)\b/g, (m, a) => 'age ' + AGE_BAND[a])
       .replace(/\b(?:monthly )?income Rs (6000|12000|20000)\b/g, (m, a) => m.replace(/Rs \d+/, 'in the band ' + INC_BAND[a]));
   }
   function renderSchemeResults(matches) {
-    const kids = [
-      h('h2', { class: 'q-text' }, bi('sch.results'))
-    ];
-    if (!matches.length) kids.push(h('p', { class: 'lead' }, bi('sch.noMatches')));
+    const kids = [L('sch.results', 'h2', { class: 'results-title' })];
+    if (!matches.length) kids.push(L('sch.noMatches', 'p', { class: 'lead' }));
     matches.forEach((m) => {
       const cls = m.eligible === true ? 'yes' : m.eligible === false ? 'no' : 'unk';
-      const badgeKey = { yes: 'sch.eligYes', no: 'sch.eligNo', unk: 'sch.eligUnknown' }[cls];
-      const mark = { yes: '✓', no: '✕', unk: '?' }[cls]; // shape as well as colour
-      kids.push(h('article', { class: 'card match ' + cls },
+      const mark = { yes: '✓', no: '✕', unk: '?' }[cls];
+      kids.push(h('article', { class: 'match' },
         h('div', { class: 'match-head' },
-          h('h3', { class: 'match-name' }, m.scheme),
-          h('span', { class: 'badge ' + cls }, h('span', { 'aria-hidden': 'true' }, mark), bi(badgeKey))),
+          h('h3', { class: 'match-name', lang: 'en' }, m.scheme),
+          h('span', { class: 'pill ' + cls }, h('span', { 'aria-hidden': 'true' }, mark), L({ yes: 'sch.eligYes', no: 'sch.eligNo', unk: 'sch.eligUnknown' }[cls]))),
         m.why_hi ? h('p', { class: 'why', lang: 'hi' }, m.why_hi) : null,
-        h('p', { class: 'why', lang: 'en' }, h('span', { class: 'why-tag' }, 'English'), bandify(m.why_en)),
-        (m.missing_info && m.missing_info.length) ? h('p', { class: 'missing' }, plain('sch.missing') + ': ' + m.missing_info.join(', ').replace(/_/g, ' ')) : null,
-        h('button', { type: 'button', class: 'btn btn-block', onclick: () => askAbout(m.scheme) }, bi('sch.askAbout'))));
+        h('p', { class: 'why', lang: 'en' }, bandify(m.why_en)),
+        (m.missing_info && m.missing_info.length) ? h('p', { class: 'missing' }, L('sch.missing'), ': ' + m.missing_info.join(', ').replace(/_/g, ' ')) : null,
+        h('button', { type: 'button', class: 'linkish', onclick: () => askAbout(m.scheme) }, L('sch.askAbout'))));
     });
-    kids.push(h('p', { class: 'fine-print' }, plain('sch.disclaimer')));
-    kids.push(h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: () => { startSchemes(); window.scrollTo(0, 0); } }, bi('sch.restart')));
+    kids.push(L('sch.disclaimer', 'p', { class: 'fine-print' }));
+    kids.push(h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: () => { startSchemes(); window.scrollTo(0, 0); } }, L('sch.restart')));
     schBody.replaceChildren(...kids);
   }
   function askAbout(name) {
     showView('ask');
-    if (S.phase === 'idle') sendAsk({ text: STRINGS.hi['sch.askQuery'].replace('{scheme}', name) });
+    if (S.phase === 'idle') sendAsk({ text: t('sch.askQuery', { scheme: name }) });
   }
 
   /* ================================================================
-     8. COMPLAINT flow
+     7. COMPLAINT
      ================================================================ */
   const CMP_FIELDS = [
-    { id: 'worker_name', type: 'text', hint: true, autocomplete: 'off' },
+    { id: 'worker_name', type: 'text', hint: true },
     { id: 'state', type: 'text' },
     { id: 'employer_name', type: 'text' },
     { id: 'work_type', type: 'text' },
@@ -884,15 +880,14 @@
   const cmpForm = $('#cmp-form'), cmpResult = $('#cmp-result');
   function fieldEl(f) {
     const id = 'f-' + f.id;
-    let input;
-    if (f.type === 'textarea') input = h('textarea', { id, name: f.id, rows: 5, maxlength: 2000, lang: 'hi' });
-    else input = h('input', { id, name: f.id, type: f.type, inputmode: f.type === 'number' ? 'numeric' : null, min: f.type === 'number' ? 0 : null, autocomplete: f.autocomplete || 'off', lang: 'hi' });
-    return h('div', { class: 'field' }, h('label', { for: id }, bi('cmp.' + f.id)),
-      f.hint ? h('p', { class: 'fine-print', style: 'margin:0 0 6px' }, plain('cmp.worker_name.hint')) : null, input);
+    const ctl = f.type === 'textarea'
+      ? h('textarea', { id, name: f.id, rows: 5, maxlength: 2000 })
+      : h('input', { id, name: f.id, type: f.type, inputmode: f.type === 'number' ? 'numeric' : null, min: f.type === 'number' ? 0 : null, autocomplete: 'off' });
+    return h('div', { class: 'field' }, L('cmp.' + f.id, 'label', { for: id }), f.hint ? L('cmp.worker_name.hint', 'p', { class: 'hint' }) : null, ctl);
   }
   CMP_FIELDS.forEach((f) => cmpForm.append(f.row ? h('div', { class: 'field-row' }, f.row.map(fieldEl)) : fieldEl(f)));
-  const cmpMsg = h('p', { class: 'missing', role: 'alert', hidden: true });
-  const cmpSubmit = h('button', { type: 'submit', class: 'btn btn-primary btn-block' }, bi('cmp.make'));
+  const cmpMsg = h('p', { class: 'form-msg', role: 'alert', hidden: true });
+  const cmpSubmit = h('button', { type: 'submit', class: 'btn btn-primary btn-block' }, L('cmp.make'));
   cmpForm.append(cmpMsg, cmpSubmit);
 
   cmpForm.addEventListener('submit', async (ev) => {
@@ -901,40 +896,38 @@
     const j = {};
     ['worker_name', 'state', 'employer_name', 'work_type', 'period_from', 'period_to', 'details'].forEach((k) => { j[k] = (fd.get(k) || '').toString().trim(); });
     j.wage_owed_inr = Number(fd.get('wage_owed_inr')) || 0;
-    if (!j.details && !j.wage_owed_inr) { cmpMsg.textContent = plain('cmp.needOne'); cmpMsg.hidden = false; return; }
+    if (!j.details && !j.wage_owed_inr) { cmpMsg.textContent = t('cmp.needOne'); cmpMsg.hidden = false; return; }
     cmpMsg.hidden = true;
-    cmpSubmit.disabled = true; cmpSubmit.replaceChildren(bi('cmp.making'));
+    cmpSubmit.disabled = true; cmpSubmit.replaceChildren(L('cmp.making'));
     try {
-      const data = await callApi('/api/complaint-draft', { json: j });
-      renderDraft(data);
+      renderDraft(await callApi('/api/complaint-draft', { json: j }));
     } catch (e) {
-      const fb = tr(e.code === 'network' ? 'err.noNetwork' : 'err.generic');
-      cmpMsg.textContent = (e.message_hi || fb.hi) + ' / ' + (e.message_en || fb.en); cmpMsg.hidden = false;
-    } finally { cmpSubmit.disabled = false; cmpSubmit.replaceChildren(bi('cmp.make')); }
+      const fb = e.code === 'network' ? 'err.noNetwork' : 'err.generic';
+      cmpMsg.textContent = (uiLang === 'en' ? e.message_en : e.message_hi) || t(fb); cmpMsg.hidden = false;
+    } finally { cmpSubmit.disabled = false; cmpSubmit.replaceChildren(L('cmp.make')); }
   });
 
   function renderDraft(d) {
     const toast = h('p', { class: 'toast', role: 'status' });
     const full = (d.draft_hi || '') + '\n\n----------\n\n' + (d.draft_en || '');
     const copy = () => {
-      const done = () => { toast.textContent = plain('cmp.copied'); };
+      const done = () => { toast.replaceChildren(L('cmp.copied')); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(full).then(done, () => legacyCopy(full, done));
       else legacyCopy(full, done);
     };
     const kids = [
-      d.requires_human_review !== false ? h('div', { class: 'review-banner', role: 'note' }, icon('warn'),
-        h('div', null, bi('cmp.reviewBanner'), h('div', { class: 'sub' }, plain('cmp.notSent')))) : h('p', { class: 'fine-print' }, plain('cmp.notSent')),
+      h('div', { class: 'review', role: 'note' }, icon('warn'), h('div', null, L('cmp.reviewBanner', 'strong'), L('cmp.notSent'))),
       h('div', { class: 'btn-row no-print' },
-        h('button', { type: 'button', class: 'btn btn-primary', onclick: () => window.print() }, bi('cmp.print')),
-        h('button', { type: 'button', class: 'btn', onclick: copy }, bi('cmp.copy'))),
+        h('button', { type: 'button', class: 'btn btn-primary', onclick: () => window.print() }, L('cmp.print')),
+        h('button', { type: 'button', class: 'btn', onclick: copy }, L('cmp.copy'))),
       toast,
-      h('section', { class: 'card' }, h('h2', null, bi('cmp.hindiDraft')), h('pre', { class: 'draft', lang: 'hi' }, d.draft_hi || '')),
-      h('section', { class: 'card' }, h('h2', null, bi('cmp.englishDraft')), h('pre', { class: 'draft en-draft', lang: 'en' }, d.draft_en || ''))
+      h('section', { class: 'paper' }, L('cmp.hindiDraft', 'h2'), h('pre', { class: 'draft', lang: 'hi' }, d.draft_hi || '')),
+      h('section', { class: 'paper' }, L('cmp.englishDraft', 'h2'), h('pre', { class: 'draft', lang: 'en' }, d.draft_en || ''))
     ];
     if (Array.isArray(d.notes_en) && d.notes_en.length) {
-      kids.push(h('section', { class: 'card' }, h('h2', null, bi('cmp.checklist')), h('ul', { class: 'checklist', lang: 'en' }, d.notes_en.map((n) => h('li', null, n)))));
+      kids.push(h('section', { class: 'paper' }, L('cmp.checklist', 'h2'), h('ul', { class: 'checklist', lang: 'en' }, d.notes_en.map((n) => h('li', null, n)))));
     }
-    kids.push(h('button', { type: 'button', class: 'btn btn-block no-print', onclick: () => { cmpResult.replaceChildren(); $('#cmp-form-wrap').hidden = false; window.scrollTo(0, 0); } }, bi('cmp.edit')));
+    kids.push(h('button', { type: 'button', class: 'btn btn-block no-print', onclick: () => { cmpResult.replaceChildren(); $('#cmp-form-wrap').hidden = false; window.scrollTo(0, 0); } }, L('cmp.edit')));
     cmpResult.replaceChildren(...kids);
     $('#cmp-form-wrap').hidden = true;
     window.scrollTo(0, 0);
@@ -947,36 +940,33 @@
   }
 
   /* ================================================================
-     9. Judge toggle + boot + demo states
+     8. Judge view, boot, demo states
      ================================================================ */
   function setJudge(on) {
     document.body.classList.toggle('judge', on);
-    $('#judge-toggle').setAttribute('aria-checked', String(on));
+    const tg = $('#judge-toggle'); if (tg) tg.setAttribute('aria-checked', String(on));
     store.set('as_judge', on ? '1' : '0');
   }
-  $('#judge-toggle').addEventListener('click', () => setJudge(!document.body.classList.contains('judge')));
 
   async function demo(state) {
     const askText = { answer: 'मज़दूरी नहीं मिली', clarify: 'clarify', refuse: 'refuse' };
     if (state === 'recording') {
-      setPhase('recording'); setTicks(12);
-      timerEl.textContent = '18 ' + STRINGS.hi['rec.left'] + ' · ' + STRINGS.en['rec.left'];
+      setPhase('recording'); setRing(12 / 30); $('#rec-time').textContent = '0:12 / 0:30';
     } else if (state === 'thinking') {
-      setPhase('thinking');
+      addUser('ठेकेदार ने मज़दूरी नहीं दी, मैं क्या करूँ?'); setPhase('thinking'); addThinking();
     } else if (askText[state]) {
-      const f = new FormData(); f.append('text', askText[state]); f.append('want_audio', 'true');
-      renderAnswer(await mockApi('/api/ask', { form: f }));
+      sendAsk({ text: askText[state] === 'मज़दूरी नहीं मिली' ? t('ex.1') : askText[state] });
     } else if (state === 'error') {
       const code = params.get('err') || 'no_speech';
       const e = MOCK.errors[code] || MOCK.errors.no_speech;
-      renderError({ code, message_hi: e.message_hi, message_en: e.message_en }, code === 'rate_limited' ? 'resend' : 'record', S.lastReq);
+      addUser(t('ex.2'));
+      renderError(e, code === 'rate_limited' ? 'resend' : 'record');
     } else if (state === 'schemes') {
       showView('schemes');
       qAnswers = { age: 30, monthly_income_inr: 12000, occupation: 'construction', is_pregnant: false };
-      qLabels = ['q.age.18_40', 'q.income.mid', 'q.work.construction', 'q.unsure', 'q.no', 'q.preg.no'];
       renderSchemeResults((await mockApi('/api/schemes', { json: qAnswers })).matches);
     } else if (state === 'schemes-q') {
-      showView('schemes'); qIndex = 2; qLabels = ['q.age.18_40', 'q.income.mid']; renderQuestion();
+      showView('schemes'); qIndex = 2; renderQuestion();
     } else if (state === 'complaint-form') {
       showView('complaint');
     } else if (state === 'complaint') {
@@ -987,13 +977,11 @@
   }
 
   buildChrome();
-  setJudge(store.get('as_judge') === '1');
+  buildWelcome();
+  setUiLang(uiLang);
+  setJudge(store.get('as_judge') === '1' || (isMock && params.get('judge') === '1'));
   setPhase('idle');
   const hashView = (location.hash || '').slice(1);
   showView(VIEWS.includes(hashView) ? hashView : 'ask', { keepScroll: true });
-  if (isMock) {
-    const st = params.get('state');
-    if (st) demo(st);
-    if (params.get('judge') === '1') setJudge(true);
-  }
+  if (isMock && params.get('state')) demo(params.get('state'));
 })();
