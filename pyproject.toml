@@ -13,8 +13,4 @@ dependencies = [
     "numpy",
 ]
 
-[tool.vercel]
-entrypoint = "app.backend.main:app"
-
-[tool.vercel.scripts]
-build = "python scripts/vercel_build.py"
+# Vercel deployment settings (entrypoint, build step, routing) live in vercel.json.
