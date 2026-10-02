@@ -296,9 +296,21 @@ def _source(card: dict) -> dict:
             "section": src.get("section", ""), "url": src.get("url") or ""}
 
 
+def clean_client_history(raw) -> list[dict]:
+    """Browser-held turns, used when this server instance has no memory of the session
+    (serverless restarts). Same shape as SessionStore.history(); sizes are capped."""
+    if not isinstance(raw, list):
+        return []
+    out = []
+    for t in raw[-6:]:
+        if isinstance(t, dict) and isinstance(t.get("user"), str) and isinstance(t.get("assistant"), str):
+            out.append({"user": t["user"][:MAX_TEXT_CHARS], "assistant": t["assistant"][:1500]})
+    return out
+
+
 def ask(session_id: str | None = None, text: str | None = None, audio: tuple | None = None,
         want_audio: bool = True, provider: str | None = None, retrieval: str | None = None,
-        language: str | None = None) -> dict:
+        language: str | None = None, client_history: list | None = None) -> dict:
     """`audio` is (bytes, filename, content_type). Text wins if both are given.
     `language`: an app/backend/languages.py code, default "hi-IN" (languages.DEFAULT_LANGUAGE).
     Omitting it reproduces the original Hindi-only behaviour exactly: no extra translate calls,
@@ -326,10 +338,10 @@ def ask(session_id: str | None = None, text: str | None = None, audio: tuple | N
     if len(text) > MAX_TEXT_CHARS:
         raise AppError("bad_request", f"Text is longer than {MAX_TEXT_CHARS} characters.")
     if audio and len(audio[0]) > config.MAX_AUDIO_BYTES:
-        raise AppError("bad_request", "Audio file is larger than 5 MB.")
+        raise AppError("bad_request", "Audio file is larger than 4 MB.")
 
     sid = store.get_or_create(session_id)
-    history = store.history(sid)
+    history = store.history(sid) or clean_client_history(client_history)
     stt_secs = 0.0
 
     # 1. STT

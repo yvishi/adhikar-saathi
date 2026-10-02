@@ -13,7 +13,7 @@ FRONTEND_DIR = ROOT / "app" / "frontend"
 TTS_CACHE_DIR = ROOT / "app" / "data" / "cache" / "tts"
 
 SARVAM_BASE = "https://api.sarvam.ai"
-MAX_AUDIO_BYTES = 5 * 1024 * 1024
+MAX_AUDIO_BYTES = 4 * 1024 * 1024  # Vercel caps request bodies at 4.5 MB; 30 s of speech is ~0.3 MB
 MAX_AUDIO_SECONDS = 30
 TTS_MAX_CHARS = 400
 

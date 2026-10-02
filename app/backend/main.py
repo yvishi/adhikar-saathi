@@ -1,5 +1,6 @@
 """FastAPI app. Run from the project root: uvicorn app.backend.main:app --reload"""
 import importlib
+import json
 
 from fastapi import Body, FastAPI, File, Form, Request, UploadFile
 from fastapi.exception_handlers import http_exception_handler
@@ -9,7 +10,7 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from . import config, llm, pipeline
+from . import config, guard, llm, pipeline
 from .errors import AppError
 
 app = FastAPI(title="Adhikar Saathi", docs_url="/api/docs", openapi_url="/api/openapi.json")
@@ -41,6 +42,7 @@ def health():
 
 @app.post("/api/ask")
 def ask(
+    request: Request,
     session_id: str | None = Form(None),
     text: str | None = Form(None),
     audio: UploadFile | None = File(None),
@@ -48,15 +50,17 @@ def ask(
     provider: str | None = Form(None),
     retrieval: str | None = Form(None),
     language: str | None = Form(None),
+    history: str | None = Form(None),
 ):
+    guard.check(guard.client_ip(request.headers, request.client.host if request.client else None))
     audio_tuple = None
     if audio is not None and audio.filename is not None:
         data = audio.file.read(config.MAX_AUDIO_BYTES + 1)
         if len(data) > config.MAX_AUDIO_BYTES:
-            raise AppError("bad_request", "Audio file is larger than 5 MB.")
+            raise AppError("bad_request", "Audio file is larger than 4 MB.")
         if data:
             audio_tuple = (data, audio.filename or "audio.webm", audio.content_type or "audio/webm")
-    return pipeline.ask(
+    result = pipeline.ask(
         session_id=session_id or None,
         text=text,
         audio=audio_tuple,
@@ -64,7 +68,19 @@ def ask(
         provider=provider or None,
         retrieval=retrieval or None,
         language=(language or "").strip() or None,
+        client_history=_parse_history(history),
     )
+    guard.record(result.get("cost_inr_est"))
+    return result
+
+
+def _parse_history(raw: str | None):
+    if not raw or len(raw) > 20000:
+        return None
+    try:
+        return json.loads(raw)
+    except ValueError:
+        return None
 
 
 def _optional_module(name: str, fn: str):

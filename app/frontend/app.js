@@ -492,7 +492,8 @@
      5. ASK: thread, composer, recording
      ================================================================ */
   const MAX_SECONDS = 30;
-  const S = { phase: 'idle', recorder: null, stream: null, chunks: [], startedAt: 0, ticker: null, audio: null };
+  // turns: recent Q&A kept in the browser so follow-ups work even if a serverless instance restarts
+  const S = { phase: 'idle', recorder: null, stream: null, chunks: [], startedAt: 0, ticker: null, audio: null, turns: [] };
 
   function msg(side, cls) {
     const m = h('div', { class: 'msg ' + side + (cls ? ' ' + cls : '') });
@@ -642,6 +643,7 @@
     else f.append('text', req.text);
     f.append('want_audio', req.wantAudio === false || !$('#want-audio').checked ? 'false' : 'true');
     f.append('language', currentLanguage);
+    if (S.turns.length) f.append('history', JSON.stringify(S.turns));
     return f;
   }
 
@@ -676,6 +678,8 @@
         else userMsg.remove();
       }
       setPhase('idle');
+      const asked = data.transcript || req.text;
+      if (asked && data.answer_hi) S.turns = S.turns.concat({ user: asked, assistant: data.answer_hi }).slice(-6);
       renderAnswer(data);
     } catch (e) {
       thinking.remove();

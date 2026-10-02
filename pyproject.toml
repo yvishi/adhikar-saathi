@@ -1,0 +1,20 @@
+[project]
+name = "adhikar-saathi"
+version = "1.0.0"
+description = "Voice assistant for Indian workers' rights, with the law cited"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "python-multipart",
+    "requests",
+    "python-dotenv",
+    "fastembed",
+    "onnxruntime",
+    "numpy",
+]
+
+[tool.vercel]
+entrypoint = "app.backend.main:app"
+
+[tool.vercel.scripts]
+build = "python scripts/vercel_build.py"

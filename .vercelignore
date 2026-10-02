@@ -1,0 +1,7 @@
+# Not needed at runtime; keeps the function bundle small.
+*.pptx
+app/data/sources/
+app/frontend/screenshots/
+app/eval/
+app/backend/tests/
+scripts/smoke_out/
