@@ -8,9 +8,6 @@ dependencies = [
     "python-multipart",
     "requests",
     "python-dotenv",
-    "fastembed",
-    "onnxruntime",
-    "numpy",
 ]
 
 # Vercel deployment settings (entrypoint, build step, routing) live in vercel.json.

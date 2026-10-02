@@ -1,10 +1,7 @@
+# Runtime packages (what Vercel installs). Search falls back to keyword (BM25) mode without fastembed.
+# For local development with the multilingual search model and tests: pip install -r app/backend/requirements-full.txt
 fastapi
 uvicorn
 python-multipart
 requests
 python-dotenv
-pytest
-httpx
-fastembed
-onnxruntime
-numpy

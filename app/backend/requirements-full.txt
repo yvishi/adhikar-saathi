@@ -1,0 +1,7 @@
+# Local development: runtime + multilingual search model + tests.
+-r requirements.txt
+fastembed
+onnxruntime
+numpy
+pytest
+httpx

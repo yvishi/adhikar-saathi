@@ -3,7 +3,7 @@
 Run everything from the project root (`F:\College\SEM5\BFWAI Hackathon`).
 
 ```
-pip install -r app/backend/requirements.txt
+pip install -r app/backend/requirements-full.txt
 uvicorn app.backend.main:app --reload            # real Sarvam calls, needs SARVAM_API_KEY in .env
 MOCK_MODE=1 uvicorn app.backend.main:app --reload   # no network, canned answers, silent WAV
 ```

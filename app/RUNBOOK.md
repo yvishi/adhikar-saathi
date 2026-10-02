@@ -3,7 +3,7 @@
 All commands run from the project root (`F:\College\SEM5\BFWAI Hackathon`). Python 3.12.
 
 ## 1. Setup on a fresh machine
-1. `pip install -r app/backend/requirements.txt` (fastapi, uvicorn, python-multipart, requests, python-dotenv, pytest, httpx, fastembed, onnxruntime, numpy).
+1. `pip install -r app/backend/requirements-full.txt` (runtime + fastembed/onnxruntime/numpy for the search model + pytest/httpx). `requirements.txt` alone is the slim runtime list used by Vercel (keyword search only).
 2. Retrieval model (about 241 MB, one time, needs internet): it must exist in `app/backend/retrieval_data/models/`. Copy the folder from the working machine, or run `python -m app.backend.retrieval --download-model`. Without it the server still starts but falls back to BM25 only; the server log then shows `Embedding model unavailable` and `debug.retriever` says `retriever:bm25`.
 3. Put `SARVAM_API_KEY=...` in a file named `.env` in the project root. Never commit, paste or print it.
 4. Optional for the UI check scripts only: `pip install playwright` (uses the installed Edge, no download).
